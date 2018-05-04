@@ -6,6 +6,10 @@ public class Station {
     private String name;
 
     private String code;
+    
+    private String pinYin;
+    
+    private String sanZiMa;
 
     public String getId() {
         return id;
@@ -30,4 +34,21 @@ public class Station {
     public void setCode(String code) {
         this.code = code;
     }
+
+	public String getPinYin() {
+		return pinYin;
+	}
+
+	public void setPinYin(String pinYin) {
+		this.pinYin = pinYin;
+	}
+
+	public String getSanZiMa() {
+		return sanZiMa;
+	}
+
+	public void setSanZiMa(String sanZiMa) {
+		this.sanZiMa = sanZiMa;
+	}
+    
 }
