@@ -20,7 +20,7 @@ public class Constants {
          String AJAX_SUCCESS = "1";//请求成功
          String AJAX_FAIL = "0";//请求失败
     }
-    
+
     /**
      *  数据请求状态码
      *  @author admin
