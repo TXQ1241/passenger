@@ -27,6 +27,19 @@ public class UserController {
 	@Qualifier("userService")
 	IUserService userService;
 	
+    @RequestMapping("view")
+    public String toUserList(String userType){
+        String page = "admin";
+        if (userType != null && Constants.UserConstants.GENERAL_USER.
+                equals(userType)) {
+            page = "";
+        } else if (userType != null && Constants.UserConstants.TICKET.
+                equals(userType)) {
+        	page = "";
+        } 
+        return page;
+    }
+	
 	@RequestMapping("getUserList")
 	@ResponseBody
 	public DataVo getUserList(UserVo userVo) {

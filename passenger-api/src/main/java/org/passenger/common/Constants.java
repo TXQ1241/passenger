@@ -29,5 +29,19 @@ public class Constants {
         String FAIL = "0";//失败
         String SUCCESS = "1";//成功
     }
+    
+    /**
+     *  @Description: 用户管理常量接口
+     *  @author admin
+     **/
+    public interface UserConstants {
+        /**
+         * 用户类型
+         */
+        String SYSTEM_ADMIN = "0"; //系统管理员
+        String GENERAL_USER = "1"; //普通用户
+        String TICKET = "2"; //车次管理
+        
+    }
 	
 }
