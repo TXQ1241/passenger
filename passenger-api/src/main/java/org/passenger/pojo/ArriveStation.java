@@ -11,9 +11,13 @@ public class ArriveStation {
 
     private Date arriveTime;
 
-    private String fareCode;
+    private String carTripCode;
 
     private Integer sort;
+
+    private String fareCode;
+
+    private String stationName;
 
     public String getId() {
         return id;
@@ -47,12 +51,12 @@ public class ArriveStation {
         this.arriveTime = arriveTime;
     }
 
-    public String getFareCode() {
-        return fareCode;
+    public String getCarTripCode() {
+        return carTripCode;
     }
 
-    public void setFareCode(String fareCode) {
-        this.fareCode = fareCode;
+    public void setCarTripCode(String carTripCode) {
+        this.carTripCode = carTripCode;
     }
 
     public Integer getSort() {
@@ -61,5 +65,21 @@ public class ArriveStation {
 
     public void setSort(Integer sort) {
         this.sort = sort;
+    }
+
+    public String getFareCode() {
+        return fareCode;
+    }
+
+    public void setFareCode(String fareCode) {
+        this.fareCode = fareCode;
+    }
+
+    public String getStationName() {
+        return stationName;
+    }
+
+    public void setStationName(String stationName) {
+        this.stationName = stationName;
     }
 }

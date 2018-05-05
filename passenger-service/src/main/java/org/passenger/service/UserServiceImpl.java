@@ -3,6 +3,7 @@ package org.passenger.service;
 import java.util.List;
 
 import org.passenger.pojo.User;
+import org.passenger.vo.UserVo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +24,21 @@ public class UserServiceImpl implements IUserService {
 			user = userList.get(0);
 		}
 		return user;
+	}
+
+	public List<User> getUsers(UserVo userVo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Integer getUserCount(UserVo userVo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void deleteUsersByIds(String[] userIds) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
