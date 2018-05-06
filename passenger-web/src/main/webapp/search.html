@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./iconfont/iconfont.css">
+    <link rel="stylesheet" href="./libs/css/amazeui.css">
+    <link rel="stylesheet" href="./libs/layui/css/layui.css">
+    <link rel="stylesheet" href="./css/personal.css">
+    <link rel="stylesheet" href="./css/cityselect.css">
+    <style>
+        .header .message-r {
+            display: none;
+        }
+
+        .line {
+            margin-bottom: 5px;
+        }
+
+        .search_ticket {
+            width: 1200px;
+            margin: 0 auto;
+            padding: 10px 20px;
+            background-color: #fff;
+        }
+
+        .search_ticket .label {
+            display: inline-block;
+            font-size: 14px;
+            font-weight: normal;
+            vertical-align: middle;
+            width: 64px;
+            color: #666
+        }
+
+        .search_ticket .city_input {
+            padding: 10px 10px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            border-radius: 5px;
+            width: 150px;
+        }
+
+        .search_ticket li {
+            margin-right: 20px;
+        }
+
+        .search_ticket .date {
+            display: inline-block;
+            width: 200px;
+            height: 38px;
+            line-height: 27px;
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            border-radius: 5px;
+            vertical-align: middle;
+            cursor: text;
+        }
+
+        .search_ticket button {
+            padding: 10px 20px;
+            background-color: #ff7600;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .ticket_content {
+            width: 1200px;
+            margin: 0 auto;
+        }
+    </style>
+    <title>客运</title>
+</head>
+
+<body>
+    <!--头 -->
+    <header>
+        <article>
+            <div class="mt-logo">
+                <!--顶部导航条 -->
+                <div class="am-container header">
+                    <ul class="message-l">
+                        <div class="topMessage">
+                            <div class="menu-hd">
+                                <a href="./login.html" target="_top" class="h">亲，请登录</a>
+                                <a href="./register.html" target="_top">免费注册</a>
+                            </div>
+                        </div>
+                    </ul>
+                    <ul class="message-r">
+                        <div class="topMessage home">
+                            <div class="menu-hd">
+                                <a href="./index.html" target="_top" class="h">首页</a>
+                            </div>
+                        </div>
+                        <div class="topMessage my-shangcheng">
+                            <div class="menu-hd MyShangcheng">
+                                <a href="./information.html" target="_top">
+                                    <i class="iconfont icon-gerenzhongxin"></i>个人中心</a>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+
+            </div>
+        </article>
+    </header>
+    <div class="nav-table">
+        <div class="long-title">
+            <span class="all-goods">车票查询</span>
+        </div>
+    </div>
+    <b class="line"></b>
+    <div class="search_ticket">
+        <ul class="clearfix">
+            <li class="f_l">
+                <span class="label">始发站</span>
+                <input type="text" class="city_input" id="citySelect1" placeholder="请输入出发站">
+            </li>
+            <li class="f_l">
+                <span class="label">终点站</span>
+                <input type="text" class="city_input" id="citySelect2" placeholder="请输入终点站">
+            </li>
+            <li class="f_l">
+                <span class="label">出发日期</span>
+                <span class="date" id="dateSelect"></span>
+            </li>
+            <li class="f_l">
+                <button id="submitBtn">搜索</button>
+            </li>
+        </ul>
+    </div>
+    <div class="ticket_content">
+        <table id="datalist" lay-filter="tableBtn"></table>
+    </div>
+
+</body>
+<script type="text/html" id="tableBtn">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="buy">购买</a>
+</script>
+<script src="./libs/layui/layui.all.js"></script>
+<script src="./js/ServerUtil.js"></script>
+<script src="./js/cityselect.js"></script>
+<script>
+    var $;
+    var jQuery;
+    layui.use(['laydate', 'table'], function () {
+        jQuery = layui.$;
+        $ = layui.$;
+        var laydate = layui.laydate;
+        var src = decodeURI(getQueryVariable('src'));
+        var target = decodeURI(getQueryVariable('target'));
+        var date = decodeURI(getQueryVariable('date'));
+        $('#citySelect1').val(src);
+        $('#citySelect2').val(target);
+        $('#dateSelect').text(date);
+        var isLogin = false;
+        ServerUtil.api('login/', 'loginStatus', {}, function (result) {
+            if (result.userName) {
+                $('.header .message-l .topMessage .menu-hd a').hide();
+                $('.header .message-r').show();
+                $('.message-l .menu-hd')[0].innerHTML =
+                    '<a href="./login.html" target="_top" class="h" id="logout">退出登录</a>'
+                $('#logout').on('click', function () {
+                    ServerUtil.api('login/', 'logout', {}, function () {
+                        window.location.href = window.location.origin +
+                            '/' + pageConfig + 'login.html';
+                    });
+                });
+                isLogin = true;
+            }
+        });
+
+        table.render({
+            elem: '#datalist',
+            // height: 315,
+            url: window.location.origin + '/' + pageConfig + 'arrvieStation/getArrvieStationList',
+            method: 'post',
+            response: {
+                statusCode: 1,
+                dataName: 'datalist'
+            },
+            request: {
+                pageName: 'pageNum', //页码的参数名称，默认：page
+                limitName: 'pageSize', //每页数据量的参数名，默认：limit
+                page: 0,
+                limit: 100
+            },
+            where: {
+                startStation: src,
+                arriveStation: target,
+                ticketDate: date
+            },
+            id: 'poemUsers',
+            done: function (res) {
+
+            },
+            cols: [
+                [ //表头
+                    {
+                        type: 'checkbox'
+                    },
+                    {
+                        field: 'carTripCode',
+                        title: '车次',
+                        // width: 150
+                    }, {
+                        field: 'startStation',
+                        title: '始发站',
+                        // width: 80
+                    }, {
+                        field: 'arriveStation',
+                        title: '终点站',
+                        // width: 150
+                    }, {
+                        field: 'startTime',
+                        title: '出发时间',
+                        // width: 200
+                    }, {
+                        field: 'arriveTime',
+                        title: '到达时间',
+                        // width: 200
+                    }, {
+                        field: 'ticketNum',
+                        title: '剩余票数',
+                        // width: 200
+                    }, {
+                        field: 'fare',
+                        title: '票价',
+                        // width: 200
+                    }, {
+                        fixed: 'right',
+                        title: '操作',
+                        minWidth: 163,
+                        // width: 178,
+                        align: 'center',
+                        toolbar: '#tableBtn'
+                    }
+                ]
+            ]
+        });
+        //表格重载函数
+        function tableReload(conditions) {
+            var obj = {};
+            if (conditions) {
+                obj.where = conditions;
+            }
+            table.reload('poemUsers', obj);
+        }
+
+        $('#submitBtn').on('click', function () {
+            var src1 = $('#citySelect1').val();
+            var target1 = $('#citySelect2').val();
+            var date1 = $('#dateSelect').text();
+            if (!src1) {
+                layer.msg('请输入始发站', {
+                    time: 1000
+                });
+            } else if (!target1) {
+                layer.msg('请输入终点站', {
+                    time: 1000
+                });
+            } else {
+                tableReload({
+                    startStation: src1,
+                    arriveStation: target1,
+                    ticketDate: date1
+                })
+            }
+        });
+        table.on('tool(tableBtn)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'buy') {
+                if (!isLogin) {
+                    window.location.href = window.location.origin + '/' + pageConfig + 'login.html';
+                } else {
+
+                }
+            }
+        });
+    });
+</script>
+
+</html>

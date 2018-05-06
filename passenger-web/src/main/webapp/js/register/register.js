@@ -49,31 +49,22 @@ $('#register').registerPanel({
             errorText: '请输入正确的手机号'          
         },
         {
-            label: '邮箱',
-            placeholder: '建议使用常用邮箱',
-            tip: '您可以用该邮箱登录和找回密码',
+            label: '余额',
+            placeholder: '您的账户余额',
+            tip: '请输入账户余额',
             isShow: true,
-            inputId: 'email',
-            type: 'text',
-            reg: /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/i,
-            errorText: '请输入正确的邮箱'              
-        },
-        {
-            label: '身份证号',
-            placeholder: '您的身份证号',
-            tip: '请输入身份证号',
-            isShow: true,
-            inputId: 'idCard',
-            type: 'text'                 
+            inputId: 'userBalance',
+            type: 'number'                 
         },
     ],
     submitBtnText: '立即注册',
     submitFuc: function (data) {
         if (data.password == data.ackPassword && data.isTrue) {
             delete data.ackPassword;
-            data.userType = '2';
-            ServerUtil.api('change-web/user/', 'save', data, function (data) {
-                window.location.href = window.location.origin + '/change-web/login.html';
+            data.userType = '1';
+            data.userBalance = parseFloat(data.userBalance).toFixed(2);
+            ServerUtil.api('user/', 'save', data, function (data) {
+                window.location.href = window.location.origin + '/passenger-web/login.html';
             });
         }
     }

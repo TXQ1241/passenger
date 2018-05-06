@@ -212,7 +212,7 @@ li.person{border-bottom:1px solid #F5F8FA ;padding-bottom:10px;padding-top: 10px
 	  
 	  
 /*分类*/
-.nav-table{max-width:1000px;margin: 0px auto;height: 45px;position: relative;overflow: hidden;display: block;margin-top:10px ;}
+.nav-table{max-width:1000px;margin: 0px auto;height: 45px;position: relative;display: block;margin-top:10px ;}
 .nav-table .all-goods{font-size: 16px;}
 .long-title{background:#d2364c;color:#fff ;height: 45px;line-height: 45px;display:block;position: absolute;width:150px ;text-align: center;font-size:16px ;top:0px;z-index: 6;}
 .nav-cont{position: absolute;padding-left:150px;display:block;width:100% ;top:0px}

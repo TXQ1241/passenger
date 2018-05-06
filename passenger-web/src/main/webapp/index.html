@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./iconfont/iconfont.css">
+    <link rel="stylesheet" href="./libs/css/amazeui.css">
+    <link rel="stylesheet" href="./libs/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./libs/layui/css/layui.css">
+    <link rel="stylesheet" href="./css/personal.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/cityselect.css">
+    <style>
+        .header .message-r {
+            display: none;
+        }
+
+        .line {
+            margin-bottom: 5px;
+        }
+    </style>
+    <title>客运</title>
+</head>
+
+<body>
+    <!--头 -->
+    <header>
+        <article>
+            <div class="mt-logo">
+                <!--顶部导航条 -->
+                <div class="am-container header">
+                    <ul class="message-l">
+                        <div class="topMessage">
+                            <div class="menu-hd">
+                                <a href="./login.html" target="_top" class="h">亲，请登录</a>
+                                <a href="./register.html" target="_top">免费注册</a>
+                            </div>
+                        </div>
+                    </ul>
+                    <ul class="message-r">
+                        <div class="topMessage home">
+                            <div class="menu-hd">
+                                <a href="./index.html" target="_top" class="h">首页</a>
+                            </div>
+                        </div>
+                        <div class="topMessage my-shangcheng">
+                            <div class="menu-hd MyShangcheng">
+                                <a href="./information.html" target="_top">
+                                    <i class="iconfont icon-gerenzhongxin"></i>个人中心</a>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+
+            </div>
+        </article>
+    </header>
+    <div class="nav-table">
+        <div class="long-title">
+            <span class="all-goods">首页</span>
+        </div>
+        <div class="passenger">
+            <div class="search">
+                <div class="title">车票预订</div>
+                <div class="content">
+                    <div class="input_box">
+                        <span class="label">始发站</span>
+                        <input type="text" class="city_input" id="citySelect1" placeholder="请输入出发站">
+                    </div>
+                    <div class="input_box">
+                        <span class="label">终点站</span>
+                        <input type="text" class="city_input" id="citySelect2" placeholder="请输入终点站">
+                    </div>
+                    <div class="input_box">
+                        <span class="label">出发日期</span>
+                        <span class="date" id="dateSelect"></span>
+                    </div>
+                    <div class="submit_btn_box">
+                        <span class="label"></span>
+                        <button id="submitBtn">搜索</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <b class="line"></b>
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <img src="./images/slideshow.jpg" alt="...">
+            </div>
+            <div class="item">
+                <img src="./images/slideshow.jpg" alt="...">
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./libs/layui/layui.all.js"></script>
+<script src="./libs/js/bootstrap.min.js"></script>
+<script src="./js/ServerUtil.js"></script>
+<script src="./js/cityselect.js"></script>
+<script>
+    var $;
+    var jQuery;
+    layui.use(['laydate'], function () {
+        jQuery = layui.$;
+        $ = layui.$;
+        var laydate = layui.laydate;
+        ServerUtil.api('login/', 'loginStatus', {}, function (result) {
+            if (result.userName) {
+                $('.header .message-l .topMessage .menu-hd a').hide();
+                $('.header .message-r').show();
+                $('.message-l .menu-hd')[0].innerHTML =
+                    '<a href="./login.html" target="_top" class="h" id="logout">退出登录</a>'
+                $('#logout').on('click', function () {
+                    ServerUtil.api('login/', 'logout', {}, function () {
+                        window.location.href = window.location.origin +
+                            '/' + pageConfig + 'login.html';
+                    });
+                });
+            }
+        });
+        ServerUtil.api('station/', 'getStationList', {}, function (result) {
+            var allCity = [];
+            result.datalist.forEach(function (station) {
+                var arr = [station.name, station.pinyin, station.sanzima];
+                var str = arr.join('|')
+                allCity.push(str);
+            });
+            setAllCity(allCity)
+            var citySelect1 = new Vcity.CitySelector({
+                input: 'citySelect1'
+            });
+            var citySelect2 = new Vcity.CitySelector({
+                input: 'citySelect2'
+            });
+
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#dateSelect', //指定元素
+                min: 0,
+                max: 30,
+                value: new Date(),
+                btns: ['now']
+            });
+        });
+        $('#submitBtn').on('click', function () {
+            var src = $('#citySelect1').val();
+            var target = $('#citySelect2').val();
+            var date = $('#dateSelect').text();
+            if (!src) {
+                layer.msg('请输入始发站', {
+					time: 1000
+				});
+            } else if (!target) {
+                layer.msg('请输入终点站', {
+					time: 1000
+				});
+            } else {
+                window.location.href = window.location.origin + '/' + pageConfig +  'search.html?src=' + encodeURI(src) + '&target=' + encodeURI(target) + '&date=' + encodeURI(date);
+            }
+        });
+    });
+</script>
+
+</html>

@@ -17,7 +17,7 @@ $('#login').loginPanel({
     forgetPwdText: '忘记密码',
     forgetPwdSrc: 'javascript:void(0)',
     submitFuc: function (account, password) {
-        ServerUtil.api('change-web/login/', 'login', {
+        ServerUtil.api('login/', 'login', {
             account: account,
             password: password
         }, function (data) {
