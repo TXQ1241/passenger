@@ -2,8 +2,11 @@ package org.passenger.service;
 
 import java.util.List;
 
+import org.passenger.dao.UserMapper;
 import org.passenger.pojo.User;
 import org.passenger.vo.UserVo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,9 +14,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class UserServiceImpl implements IUserService {
 
+	@Autowired
+	@Qualifier("userMapper")
+	UserMapper userMapper;
+
 	public List<User> getUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		return userMapper.getUser(user);
 	}
 
 	public User getUserByAccount(String account) {
@@ -27,18 +33,15 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	public List<User> getUsers(UserVo userVo) {
-		// TODO Auto-generated method stub
-		return null;
+		return userMapper.getUserList(userVo);
 	}
 
 	public Integer getUserCount(UserVo userVo) {
-		// TODO Auto-generated method stub
-		return null;
+		return userMapper.getUserCount(userVo);
 	}
 
 	public void deleteUsersByIds(String[] userIds) {
-		// TODO Auto-generated method stub
-		
+		userMapper.deleteUserByIds(userIds);
 	}
 
 }

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.passenger.dao.StationMapper" >
+  <resultMap id="BaseResultMap" type="org.passenger.pojo.Station" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="pinyin" property="pinyin" jdbcType="VARCHAR" />
+    <result column="sanzima" property="sanzima" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, code, pinyin, sanzima
+  </sql>
+  <!-- 获取车站脚本 -->
+  <sql id="Get_Station_Sql">
+  	<if test="code != null and code != ''">
+  		and s.code = #{code}
+  	</if>
+  </sql>
+  <!-- 保存车站信息 -->
+  <insert id="insert" parameterType="org.passenger.pojo.Station" >
+    insert into station (id, name, code, 
+      pinyin, sanzima)
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{pinyin,jdbcType=VARCHAR}, #{sanzima,jdbcType=VARCHAR})
+  </insert>
+  
+  <!-- 更新车站信息 -->
+  <update id="update" parameterType="org.passenger.pojo.Station" >
+    update station
+    set name = #{name,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      pinyin = #{pinyin,jdbcType=VARCHAR},
+      sanzima = #{sanzima,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- 获取车站信息 -->
+  <select id="getStationList" resultMap="BaseResultMap" parameterType="org.passenger.vo.StationVo">
+  	select * from station s
+  	<where>
+  		<include refid="Get_Station_Sql"></include>
+  	</where>
+  	limit #{pageNum},#{pageSize}
+  </select>
+  
+  <!-- 获取信息记录数 -->
+  <select id="getStationCount">
+  	select count(*) from s
+  	<where>
+  		<include refid="Get_Station_Sql"></include>
+  	</where>
+  </select>
+  
+  <!-- 批量删除车站信息 -->
+  <delete id="deleteStationByIds" parameterType="java.lang.String">
+    delete from station s
+    <where>
+      s.id in
+      <foreach collection="array" item="id" separator="," open="(" close=")">
+        #{id}
+      </foreach>
+    </where>
+  </delete>
+</mapper>

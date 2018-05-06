@@ -29,6 +29,11 @@ public class ArriveStationController {
 	@ResponseBody
 	public DataVo getArriveStations(ArriveVo arrvieVo) {
 		DataVo dataVo = new DataVo();
+		Integer pageNum = arrvieVo.getPageNum();
+		//设置查询开始的条数(就是从哪条开始查询)
+		if(pageNum != null) {
+			arrvieVo.setPageNum((pageNum-1)*arrvieVo.getPageSize());
+		}
 		try {
 			List<ArriveVo> userList = arriveStationService.getStations(arrvieVo);
 			dataVo.setDatalist(userList);
