@@ -15,6 +15,8 @@ public class Orders {
 
     private String status;
 
+    private String carTripId;
+
     public String getId() {
         return id;
     }
@@ -61,5 +63,13 @@ public class Orders {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getCarTripId() {
+        return carTripId;
+    }
+
+    public void setCarTripId(String carTripId) {
+        this.carTripId = carTripId;
     }
 }

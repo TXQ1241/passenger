@@ -1,9 +1,11 @@
-package org.passenger.pojo;
+package org.passenger.vo;
 
 import java.util.Date;
 
-public class ArriveStation {
+public class ArriveVo{
     private String id;
+
+    private String ids;
 
     private String stationId;
 
@@ -11,11 +13,15 @@ public class ArriveStation {
 
     private Date arriveTime;
 
-    private String carTripCode;
+    private String carTripCode;//车次编码
 
     private Integer sort;
 
     private String fareCode;
+
+    private String fare;
+
+    private Integer ticketNum;
 
     private String stationName;
 
@@ -29,6 +35,14 @@ public class ArriveStation {
 
     public String getStationId() {
         return stationId;
+    }
+
+    public String getIds() {
+        return ids;
+    }
+
+    public void setIds(String ids) {
+        this.ids = ids;
     }
 
     public void setStationId(String stationId) {
@@ -75,11 +89,27 @@ public class ArriveStation {
         this.fareCode = fareCode;
     }
 
+    public String getFare() {
+        return fare;
+    }
+
+    public void setFare(String fare) {
+        this.fare = fare;
+    }
+
     public String getStationName() {
         return stationName;
     }
 
     public void setStationName(String stationName) {
         this.stationName = stationName;
+    }
+
+    public Integer getTicketNum() {
+        return ticketNum;
+    }
+
+    public void setTicketNum(Integer ticketNum) {
+        this.ticketNum = ticketNum;
     }
 }

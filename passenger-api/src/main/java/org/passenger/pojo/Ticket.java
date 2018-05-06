@@ -5,7 +5,7 @@ import java.util.Date;
 public class Ticket {
     private String id;
 
-    private String fareCode;
+    private String passStationId;
 
     private Date ticketDate;
 
@@ -19,12 +19,12 @@ public class Ticket {
         this.id = id;
     }
 
-    public String getFareCode() {
-        return fareCode;
+    public String getPassStationId() {
+        return passStationId;
     }
 
-    public void setFareCode(String fareCode) {
-        this.fareCode = fareCode;
+    public void setPassStationId(String passStationId) {
+        this.passStationId = passStationId;
     }
 
     public Date getTicketDate() {

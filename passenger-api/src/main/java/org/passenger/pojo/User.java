@@ -14,7 +14,7 @@ public class User {
     private String phoneNum;
 
     private Double userBalance;
-    
+
     private String userType;
 
     public String getId() {
@@ -73,12 +73,11 @@ public class User {
         this.userBalance = userBalance;
     }
 
-	public String getUserType() {
-		return userType;
-	}
+    public String getUserType() {
+        return userType;
+    }
 
-	public void setUserType(String userType) {
-		this.userType = userType;
-	}
-    
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
 }

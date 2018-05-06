@@ -6,10 +6,10 @@ public class Station {
     private String name;
 
     private String code;
-    
-    private String pinYin;
-    
-    private String sanZiMa;
+
+    private String pinyin;
+
+    private String sanzima;
 
     public String getId() {
         return id;
@@ -35,20 +35,19 @@ public class Station {
         this.code = code;
     }
 
-	public String getPinYin() {
-		return pinYin;
-	}
+    public String getPinyin() {
+        return pinyin;
+    }
 
-	public void setPinYin(String pinYin) {
-		this.pinYin = pinYin;
-	}
+    public void setPinyin(String pinyin) {
+        this.pinyin = pinyin;
+    }
 
-	public String getSanZiMa() {
-		return sanZiMa;
-	}
+    public String getSanzima() {
+        return sanzima;
+    }
 
-	public void setSanZiMa(String sanZiMa) {
-		this.sanZiMa = sanZiMa;
-	}
-    
+    public void setSanzima(String sanzima) {
+        this.sanzima = sanzima;
+    }
 }
