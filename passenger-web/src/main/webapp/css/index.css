@@ -1,0 +1,66 @@
+.passenger {
+  width: 1200px;
+  margin: 0 auto;
+  position: relative; }
+  .passenger .search {
+    position: absolute;
+    top: 68px;
+    left: 0;
+    width: 426px;
+    height: 290px;
+    border: solid 4px #ff9000;
+    position: relative;
+    background: #fff;
+    z-index: 100;
+    border-radius: 3px; }
+    .passenger .search .title {
+      height: 44px;
+      line-height: 44px;
+      text-align: center;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      background: #ff9000;
+      color: #fff; }
+    .passenger .search .content {
+      width: 100%;
+      padding: 30px 20px; }
+      .passenger .search .content .input_box {
+        margin-bottom: 20px; }
+        .passenger .search .content .input_box .label {
+          display: inline-block;
+          width: 25%;
+          color: #666;
+          font-size: 14px;
+          font-weight: normal;
+          vertical-align: middle; }
+        .passenger .search .content .input_box .city_input {
+          width: 70%;
+          padding: 5px 10px;
+          border: 1px solid #ccc;
+          font-size: 14px;
+          border-radius: 5px; }
+        .passenger .search .content .input_box .date {
+          display: inline-block;
+          width: 70%;
+          height: 28px;
+          line-height: 19px;
+          padding: 5px 10px;
+          border: 1px solid #ccc;
+          font-size: 14px;
+          border-radius: 5px;
+          vertical-align: middle;
+          cursor: text; }
+      .passenger .search .content .submit_btn_box .label {
+        display: inline-block;
+        width: 25%;
+        color: #666;
+        font-size: 14px;
+        font-weight: normal;
+        vertical-align: middle; }
+      .passenger .search .content .submit_btn_box button {
+        width: 70%;
+        height: 38px;
+        background-color: #ff7600;
+        color: white;
+        border-radius: 5px; }

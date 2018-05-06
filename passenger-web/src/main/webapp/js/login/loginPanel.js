@@ -93,10 +93,10 @@ $.widget("panel.loginPanel", {
             $(this).parent().children('input').val('');
         });
 
-        var forgetPwdBox = $('<div class="forget-pwd-box clearfix"></div>').appendTo(this.rightTabContent);
-        var forgetPwd = $('<a class="forget-pwd pull-right"></a>').appendTo(forgetPwdBox);
-        forgetPwd.text(this.options.forgetPwdText);
-        forgetPwd[0].href = this.options.forgetPwdSrc;
+        // var forgetPwdBox = $('<div class="forget-pwd-box clearfix"></div>').appendTo(this.rightTabContent);
+        // var forgetPwd = $('<a class="forget-pwd pull-right"></a>').appendTo(forgetPwdBox);
+        // forgetPwd.text(this.options.forgetPwdText);
+        // forgetPwd[0].href = this.options.forgetPwdSrc;
 
         var submitBtnBox = $('<div class="submit-btn-box"></div>').appendTo(this.rightTabContent);
         var submitBtn = $('<button>登&nbsp;&nbsp;&nbsp;&nbsp;录</button>').appendTo(submitBtnBox);

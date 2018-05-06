@@ -1,6 +1,6 @@
 if (window.pageConfig == null) {
     window.pageConfig = {
-        urlPrex: '',
+        urlPrex: 'passenger-web/',
     };
 }
 ServerUtil = {
