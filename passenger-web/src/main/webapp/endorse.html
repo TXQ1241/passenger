@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="./libs/css/amazeui.css">
     <link rel="stylesheet" href="./libs/layui/css/layui.css">
     <link rel="stylesheet" href="./css/personal.css">
-    <link rel="stylesheet" href="./css/cityselect.css">
     <style>
         .header .message-r {
             display: none;
@@ -118,11 +117,11 @@
         <ul class="clearfix">
             <li class="f_l">
                 <span class="label">始发站</span>
-                <input type="text" class="city_input" id="citySelect1" placeholder="请输入出发站">
+                <input type="text" class="city_input" id="citySelect1" placeholder="请输入出发站" readonly>
             </li>
             <li class="f_l">
                 <span class="label">终点站</span>
-                <input type="text" class="city_input" id="citySelect2" placeholder="请输入终点站">
+                <input type="text" class="city_input" id="citySelect2" placeholder="请输入终点站" readonly>
             </li>
             <li class="f_l">
                 <span class="label">出发日期</span>
@@ -139,11 +138,10 @@
 
 </body>
 <script type="text/html" id="tableBtn">
-    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="buy">购买</a>
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="buy">改签</a>
 </script>
 <script src="./libs/layui/layui.all.js"></script>
 <script src="./js/ServerUtil.js"></script>
-<script src="./js/cityselect.js"></script>
 <script>
     var $;
     var jQuery;
@@ -175,19 +173,6 @@
         });
 
         ServerUtil.api('station/', 'getStationList', {}, function (result) {
-            var allCity = [];
-            result.datalist.forEach(function (station) {
-                var arr = [station.name, station.pinyin, station.sanzima];
-                var str = arr.join('|')
-                allCity.push(str);
-            });
-            setAllCity(allCity)
-            var citySelect1 = new Vcity.CitySelector({
-                input: 'citySelect1'
-            });
-            var citySelect2 = new Vcity.CitySelector({
-                input: 'citySelect2'
-            });
 
             //执行一个laydate实例
             laydate.render({
@@ -198,6 +183,7 @@
                 btns: ['now']
             });
         });
+
 
         table.render({
             elem: '#datalist',
@@ -277,21 +263,11 @@
             var src1 = $('#citySelect1').val();
             var target1 = $('#citySelect2').val();
             var date1 = $('#dateSelect').text();
-            if (!src1) {
-                layer.msg('请输入始发站', {
-                    time: 1000
-                });
-            } else if (!target1) {
-                layer.msg('请输入终点站', {
-                    time: 1000
-                });
-            } else {
-                tableReload({
-                    startStation: src1,
-                    arriveStation: target1,
-                    ticketDate: date1
-                })
-            }
+            tableReload({
+                startStation: src1,
+                arriveStation: target1,
+                ticketDate: date1
+            })
         });
         table.on('tool(tableBtn)', function (obj) {
             var data = obj.data;
@@ -299,13 +275,7 @@
                 if (!isLogin) {
                     window.location.href = window.location.origin + '/' + pageConfig + 'login.html';
                 } else {
-                    ServerUtil.api('order/', 'save', {
-                        
-                    }, function (result) {
-                        layer.msg(result.msg, {
-                            time: 1000
-                        });
-                    });
+
                 }
             }
         });
