@@ -2,7 +2,7 @@ package org.passenger.vo;
 
 import java.util.Date;
 
-public class ArriveVo{
+public class ArriveVo extends PageVo{
     private String id;
 
     private String ids;
