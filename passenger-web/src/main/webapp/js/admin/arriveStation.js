@@ -9,8 +9,8 @@ layui.use(['table'], function () {
     var tableTitle = {
         startStationName: '始发站',
         arriveStationName: '终点站',
-        startTimeStr: '始发时间',
-        arriveTimeStr: '到达时间',
+        startTime: '始发时间',
+        arriveTime: '到达时间',
         price: '票价'
     };
     var userInfo;
@@ -111,11 +111,11 @@ layui.use(['table'], function () {
                     title: '终点站',
                     // width: 150
                 }, {
-                    field: 'startTimeStr',
+                    field: 'startTime',
                     title: '始发时间',
                     // width: 200
                 }, {
-                    field: 'arriveTimeStr',
+                    field: 'arriveTime',
                     title: '到达时间',
                     // width: 200
                 }, {
@@ -219,14 +219,14 @@ layui.use(['table'], function () {
             });
             //执行一个laydate实例
             laydate.render({
-                elem: '#startTimeStr', //指定元素
+                elem: '#startTime', //指定元素
                 min: 0,
                 max: 60,
                 btns: ['confirm', 'now'],
                 type: 'time'
             });
             laydate.render({
-                elem: '#arriveTimeStr', //指定元素
+                elem: '#arriveTime', //指定元素
                 min: 0,
                 max: 60,
                 btns: ['confirm', 'now'],
@@ -328,7 +328,7 @@ layui.use(['table'], function () {
         });
         //执行一个laydate实例
         laydate.render({
-            elem: '#startTimeStr', //指定元素
+            elem: '#startTime', //指定元素
             min: 0,
             max: 60,
             value: new Date(),
@@ -336,7 +336,7 @@ layui.use(['table'], function () {
             type: 'time'
         });
         laydate.render({
-            elem: '#arriveTimeStr', //指定元素
+            elem: '#arriveTime', //指定元素
             min: 0,
             max: 60,
             value: new Date(),
