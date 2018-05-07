@@ -125,7 +125,7 @@ layui.use(['table'], function () {
                 }, {
                     fixed: 'right',
                     title: '操作',
-                    minWidth: 163,
+                    minWidth: 240,
                     // width: 178,
                     align: 'center',
                     toolbar: '#tableBtn'
@@ -242,7 +242,7 @@ layui.use(['table'], function () {
                 content: $('#tableBox')
             });
         } else if (obj.event === 'toTicket') {
-            window.location.href = window.location.origin + window.location.pathname + '?routeId=' + data.id;
+            window.location.href = window.location.origin + 'ticket/setRouteId?routeId=' + data.id;
         }
     });
 

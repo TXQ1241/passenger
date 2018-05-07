@@ -114,7 +114,7 @@ layui.use(['table'], function () {
                 }, {
                     fixed: 'right',
                     title: '操作',
-                    minWidth: 163,
+                    minWidth: 240,
                     // width: 178,
                     align: 'center',
                     toolbar: '#tableBtn'
@@ -190,6 +190,37 @@ layui.use(['table'], function () {
             laytpl(getTpl).render(userList, function (html) {
                 view.innerHTML = html;
             });
+            //获取车站列表
+            ServerUtil.api('station/', 'getStationList', {}, function (result) {
+                var allCity = [];
+                result.datalist.forEach(function (station) {
+                    var arr = [station.name, station.pinyin, station.sanzima];
+                    var str = arr.join('|')
+                    allCity.push(str);
+                });
+                setAllCity(allCity)
+                var citySelect1 = new Vcity.CitySelector({
+                    input: 'startStationName'
+                });
+                var citySelect2 = new Vcity.CitySelector({
+                    input: 'arriveStationName'
+                });
+            });
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#startTimeStr', //指定元素
+                min: 0,
+                max: 30,
+                btns: ['confirm', 'now'],
+                type: 'time'
+            });
+            laydate.render({
+                elem: '#arriveTimeStr', //指定元素
+                min: 0,
+                max: 30,
+                btns: ['confirm', 'now'],
+                type: 'time'
+            });
             layer.open({
                 title: '编辑',
                 type: 1,
@@ -215,7 +246,7 @@ layui.use(['table'], function () {
                 content: $('#tableBox')
             });
         } else if (obj.event === 'toArrive') {
-            window.location.href = window.location.origin + window.location.pathname + '?carTripId=' + data.id;
+            window.location.href = window.location.origin + '/route/setCarTripId?carTripId=' + data.id;
         }
     });
 
