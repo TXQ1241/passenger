@@ -81,6 +81,26 @@ public class UserController {
 		}
 		return user;
 	}
+
+	@RequestMapping("save")
+    @ResponseBody
+    public Map<String, String> saveUser(@RequestBody User user){
+
+        Map<String, String> msgMap = new HashMap<String, String>();
+        try {
+            if (StringUtils.isNotBlank(user.getId())) {
+                userService.update(user);
+            } else {
+                user.setId(StringUtils.getUUID());
+                userService.save(user);
+            }
+            msgMap.put(Constants.AjaxStatus.AJAX_SUCCESS,"保存车站信息成功");
+        } catch (Exception e) {
+            msgMap.put(Constants.AjaxStatus.AJAX_FAIL,"保存车站信息失败");
+        }
+        return msgMap;
+
+    }
 	
     /**
      *  @Description: 删除用户

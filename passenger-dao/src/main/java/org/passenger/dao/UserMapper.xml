@@ -33,6 +33,18 @@
       #{password,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, #{phoneNum,jdbcType=VARCHAR}, 
       #{userBalance,jdbcType=DOUBLE}, #{userType,jdbcType=VARCHAR})
   </insert>
+  <!--更新用户-->
+  <update id="update" parameterType="org.passenger.pojo.User">
+    update user
+    set account = #{account,jdbcType=VARCHAR},
+    user_name = #{userName,jdbcType=VARCHAR},
+    password = #{password,jdbcType=VARCHAR},
+    id_card = #{idCard,jdbcType=VARCHAR},
+    phone_num = #{phoneNum,jdbcType=VARCHAR},
+    user_balance = #{userBalance,jdbcType=DOUBLE},
+    user_type = #{userType,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
 
   <!-- 查询用户信息-->
   <select id="getUserList" resultMap="BaseResultMap" parameterType="org.passenger.vo.UserVo">
@@ -41,6 +53,18 @@
       <include refid="Get_User_Sql"></include>
     </where>
     limit #{pageNum},#{pageSize}
+  </select>
+
+  <select id="getUser" resultMap="BaseResultMap" parameterType="org.passenger.pojo.User">
+    select * from user u
+    <where>
+      <if test="id != null and id != ''">
+        and u.id = #{id}
+      </if>
+      <if test="account != null and account != ''">
+        and u.account = #{account}
+      </if>
+    </where>
   </select>
 
   <!-- 查询用户记录数 -->

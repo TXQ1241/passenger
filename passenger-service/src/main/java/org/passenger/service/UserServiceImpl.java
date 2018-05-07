@@ -44,4 +44,12 @@ public class UserServiceImpl implements IUserService {
 		userMapper.deleteUserByIds(userIds);
 	}
 
+	public void save(User user) {
+		userMapper.insert(user);
+	}
+
+	public void update(User user) {
+		userMapper.update(user);
+	}
+
 }
