@@ -52,7 +52,9 @@
     <where>
       <include refid="Get_User_Sql"></include>
     </where>
-    limit #{pageNum},#{pageSize}
+  	<if test="pageNum != null and pageSize != null">
+  		limit #{pageNum},#{pageSize}
+  	</if>
   </select>
 
   <select id="getUser" resultMap="BaseResultMap" parameterType="org.passenger.pojo.User">

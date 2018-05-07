@@ -30,15 +30,17 @@
   </update>
   
   <!-- 获取车票信息 -->
-  <select id="getTicketList" resultMap="BaseResultMap" parameterMap="org.passenger.vo.TicketVo">
+  <select id="getTicketList" resultMap="BaseResultMap" parameterType="org.passenger.vo.TicketVo">
   	select * from ticket t
   	<where>
   		<include refid="Get_Ticket_Sql"></include>
   	</where>
-  	limit #{pageNum},#{pageSize}
+  	<if test="pageNum != null and pageSize != null">
+  		limit #{pageNum},#{pageSize}
+  	</if>
   </select>
     <!-- 获取车票记录数 -->
-  <select id="getTicketList" resultType="java.lang.Integer" parameterMap="org.passenger.vo.TicketVo">
+  <select id="getTicketCount" resultType="java.lang.Integer" parameterType="org.passenger.vo.TicketVo">
   	select count(*) from ticket t
   	<where>
   		<include refid="Get_Ticket_Sql"></include>

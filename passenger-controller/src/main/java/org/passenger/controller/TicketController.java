@@ -40,11 +40,11 @@ public class TicketController {
 			ticketVo.setPageNum((pageNum-1)*ticketVo.getPageSize());
 		}
 		try {
-			List<Ticket> userList = ticketService.getTicketList(ticketVo);
-			dataVo.setDatalist(userList);
+			List<Ticket> ticketList = ticketService.getTicketList(ticketVo);
+			dataVo.setDatalist(ticketList);
 			dataVo.setCode(Constants.DataCode.SUCCESS);
 			dataVo.setMsg("数据获取成功");
-			if (userList != null) {
+			if (ticketList != null) {
 				dataVo.setCount(ticketService.getTicketCount(ticketVo));
 			} else {
 				dataVo.setCount(Constants.ZERO_NUM);

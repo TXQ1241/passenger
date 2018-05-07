@@ -48,15 +48,17 @@
   
   <!-- 获取订单记录 -->
   <select id="getOrders" resultMap="BaseResultMap" parameterType = "org.passenger.vo.OrderVo" >
-  	select * from orders o 
+  	select * from orders o
   	<where>
   		<include refid="Get_Orders_Sql"></include>
   	</where>
-  	limit #{pageNum},#{pageSize}
+  	<if test="pageNum != null and pageSize != null">
+  		limit #{pageNum},#{pageSize}
+  	</if>
   </select>
   
   <!-- 获取订单记录数 -->
-  <select id="getOrderCount" resultType="">
+  <select id="getOrderCount" resultType="java.lang.Integer" parameterType="org.passenger.vo.OrderVo">
   	select count(*) from orders o
   	<where>
   		<include refid="Get_Orders_Sql"></include>

@@ -57,11 +57,13 @@
   	<where>
   		<include refid="Get_Route_Sql"></include>
   	</where>
-  	limit #{pageNum},#{pageSize}
+  	<if test="pageNum != null and pageSize != null">
+  		limit #{pageNum},#{pageSize}
+  	</if>
   </select>
   
   <!-- 获取线路数 -->
-  <select id="getRouteList" resultType="java.lang.Integer" parameterType="org.passenger.vo.RouteVo">
+  <select id="getRouteCount" resultType="java.lang.Integer" parameterType="org.passenger.vo.RouteVo">
   	select count(*) from route r 
   	<where>
   		<include refid="Get_Route_Sql"></include>
