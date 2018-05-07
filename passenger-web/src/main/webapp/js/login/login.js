@@ -23,9 +23,9 @@ $('#login').loginPanel({
         }, function (data) {
             if (data && data.status && data.status == '1') {
                 if (data.userType == '0') {
-                    window.location.href = window.location.origin + '/change-web/user/view';
+                    window.location.href = window.location.origin + '/' + pageConfig + 'user/view';
                 } else {
-                    window.location.href = window.location.origin + '/change-web/index.html';
+                    window.location.href = window.location.origin + '/' + pageConfig + 'index.html';
                 }
             } else {
                 $('.error-message').show();
