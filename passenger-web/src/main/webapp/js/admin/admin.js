@@ -183,9 +183,9 @@ layui.use(['table'], function () {
 
     //菜单跳转
     $('#station').on('click', function () {
-        window.location.href = window.location.origin + window.location.pathname + '?userType=2';
+        window.location.href = window.location.origin + '/passenger-web/user/?userType=2';
     });
     $('#carTrip').on('click', function () {
-        window.location.href = window.location.origin + window.location.pathname + '?userType=3';
+        window.location.href = window.location.origin + '/passenger-web/user/?userType=3';
     });
 });
