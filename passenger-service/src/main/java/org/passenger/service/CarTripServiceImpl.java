@@ -19,7 +19,7 @@ public class CarTripServiceImpl implements ICarTripService {
     CarTripMapper carTripMapper;
 
     public List<CarTrip> getCarTrips(CarTripVo carTripVo) {
-        return carTripMapper.getCarTrips(carTripVo);
+        return carTripMapper.getCarTripList(carTripVo);
     }
 
     public Integer getCarTripCount(CarTripVo carTripVo) {
