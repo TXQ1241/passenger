@@ -6,12 +6,10 @@ layui.use(['table'], function () {
     var laytpl = layui.laytpl;
     var element = layui.element;
     var tableTitle = {
-        account: '账号',
-        password: '密码',
-        userName: '用户名',
-        email: '邮箱',
-        phoneNum: '手机号',
-        idCard: '身份证号'
+        name: '车站名称',
+        code: '车站编码',
+        pinyin: '拼音',
+        sanzima: '三字码'
     };
     var userInfo;
     //获取用户信息
@@ -66,7 +64,7 @@ layui.use(['table'], function () {
     table.render({
         elem: '#datalist',
         // height: 315,
-        url: window.location.origin + '/' + pageConfig.urlPrex + 'user/userList',
+        url: window.location.origin + '/' + pageConfig.urlPrex + 'station/getStationList',
         method: 'post',
         response: {
             statusCode: 1,
@@ -77,9 +75,6 @@ layui.use(['table'], function () {
             limitName: 'pageSize', //每页数据量的参数名，默认：limit
             page: 0,
             limit: 10
-        },
-        where: {
-            userType: 1
         },
         page: {
             limits: [5, 10, 20, 50, 100]
@@ -94,30 +89,20 @@ layui.use(['table'], function () {
                     type: 'checkbox'
                 },
                 {
-                    field: 'account',
-                    title: '账号',
+                    field: 'name',
+                    title: '站名',
                     // width: 150
                 }, {
-                    field: 'password',
-                    title: '密码',
-                    width: 80
+                    field: 'code',
+                    title: '车站编码',
+                    // width: 80
                 }, {
-                    field: 'userName',
-                    title: '用户名',
+                    field: 'pinyin',
+                    title: '拼音',
                     // width: 150
                 }, {
-                    field: 'email',
-                    title: '邮箱',
-                    // width: 200
-                }, {
-                    field: 'phoneNum',
-                    title: '手机号',
-                    sort: true,
-                    // width: 200
-                }, {
-                    field: 'idCard',
-                    title: '身份证号',
-                    sort: true,
+                    field: 'sanzima',
+                    title: '三字码',
                     // width: 200
                 }, {
                     fixed: 'right',
@@ -173,7 +158,7 @@ layui.use(['table'], function () {
             layer.confirm('真的删除么', {
                 skin: 'layui-layer-molv'
             }, function (index) {
-                ServerUtil.api('change-web/user/', 'delete', {
+                ServerUtil.api('station/', 'delete', {
                     ids: data.id
                 }, function () {
                     // obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
@@ -209,7 +194,7 @@ layui.use(['table'], function () {
                     $('.table-edit-input').each(function (index, val) {
                         data[val.dataset.type] = $(val).val();
                     });
-                    ServerUtil.api('user/', 'save', data, function () {
+                    ServerUtil.api('station/', 'save', data, function () {
                         //同步更新缓存对应的值
                         obj.update(data);
                         // tableReload();
@@ -229,13 +214,10 @@ layui.use(['table'], function () {
     $('#searchBtn').on('click', function () {
         // var type = $(this).data('type');
         var obj = {};
-        var account = $('#accountReload').val();
-        var userName = $('#userNameReload').val();
-        var age = $('#ageReload').val();
-        obj.account = account;
-        obj.userName = userName;
-        obj.age = age;
-        obj.userType = 1;
+        var name = $('#nameReload').val();
+        var code = $('#codeReload').val();
+        obj.name = name;
+        obj.code = code;
         tableReload(obj);
     });
     //批量删除
@@ -252,7 +234,7 @@ layui.use(['table'], function () {
                 userIdsArr.push(val.id);
             });
             var userIdsStr = userIdsArr.join(',');
-            ServerUtil.api('change-web/user/', 'delete', {
+            ServerUtil.api('station/', 'delete', {
                 ids: userIdsStr
             }, function () {
                 layer.close(index);
@@ -289,8 +271,7 @@ layui.use(['table'], function () {
                 $('.table-add-input').each(function (index, val) {
                     obj[val.dataset.type] = $(val).val();
                 });
-                obj.userType = '1';
-                ServerUtil.api('change-web/user/', 'save', obj, function () {
+                ServerUtil.api('station/', 'save', obj, function () {
                     tableReload();
                     layer.close(index);
                 });
