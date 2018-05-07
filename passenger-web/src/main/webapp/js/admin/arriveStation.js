@@ -354,7 +354,7 @@ layui.use(['table'], function () {
                 $('.table-add-input').each(function (index, val) {
                     obj[val.dataset.type] = $(val).val();
                 });
-                data.carTripId = carTripId;
+                obj.carTripId = carTripId;
                 ServerUtil.api('route/', 'save', obj, function () {
                     tableReload();
                     layer.close(index);
