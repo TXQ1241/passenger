@@ -9,9 +9,7 @@ layui.use(['table'], function () {
     var tableTitle = {
         code: '车次',
         startStationName: '始发站',
-        arriveStationName: '终点站',
-        startTimeStr: '始发时间',
-        arriveTimeStr: '到达时间'
+        arriveStationName: '终点站'
     };
     var userInfo;
     //获取用户信息
@@ -102,15 +100,6 @@ layui.use(['table'], function () {
                     field: 'arriveStationName',
                     title: '终点站',
                     // width: 150
-                }, {
-                    field: 'startTimeStr',
-                    title: '始发时间',
-                    // width: 200
-                }, {
-                    field: 'arriveTimeStr',
-                    title: '到达时间',
-                    sort: true,
-                    // width: 200
                 }, {
                     fixed: 'right',
                     title: '操作',
@@ -206,21 +195,6 @@ layui.use(['table'], function () {
                     input: 'arriveStationName'
                 });
             });
-            //执行一个laydate实例
-            laydate.render({
-                elem: '#startTimeStr', //指定元素
-                min: 0,
-                max: 30,
-                btns: ['confirm', 'now'],
-                type: 'time'
-            });
-            laydate.render({
-                elem: '#arriveTimeStr', //指定元素
-                min: 0,
-                max: 30,
-                btns: ['confirm', 'now'],
-                type: 'time'
-            });
             layer.open({
                 title: '编辑',
                 type: 1,
@@ -313,23 +287,6 @@ layui.use(['table'], function () {
             var citySelect2 = new Vcity.CitySelector({
                 input: 'arriveStationName'
             });
-        });
-        //执行一个laydate实例
-        laydate.render({
-            elem: '#startTimeStr', //指定元素
-            min: 0,
-            max: 30,
-            value: new Date(),
-            btns: ['confirm', 'now'],
-            type: 'time'
-        });
-        laydate.render({
-            elem: '#arriveTimeStr', //指定元素
-            min: 0,
-            max: 30,
-            value: new Date(),
-            btns: ['confirm', 'now'],
-            type: 'time'
         });
         layer.open({
             title: '新增',
