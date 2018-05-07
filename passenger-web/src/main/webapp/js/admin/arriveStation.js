@@ -7,8 +7,8 @@ layui.use(['table'], function () {
     var element = layui.element;
     var laydate = layui.laydate;
     var tableTitle = {
-        startStation: '始发站',
-        arriveStation: '终点站',
+        startStationName: '始发站',
+        arriveStationName: '终点站',
         startTimeStr: '始发时间',
         arriveTimeStr: '到达时间',
         price: '票价'
@@ -103,11 +103,11 @@ layui.use(['table'], function () {
                     title: '车次',
                     // width: 150
                 }, {
-                    field: 'startStation',
+                    field: 'startStationName',
                     title: '始发站',
                     // width: 80
                 }, {
-                    field: 'arriveStation',
+                    field: 'arriveStationName',
                     title: '终点站',
                     // width: 150
                 }, {
@@ -211,10 +211,10 @@ layui.use(['table'], function () {
                 });
                 setAllCity(allCity)
                 var citySelect1 = new Vcity.CitySelector({
-                    input: 'startStation'
+                    input: 'startStationName'
                 });
                 var citySelect2 = new Vcity.CitySelector({
-                    input: 'arriveStation'
+                    input: 'arriveStationName'
                 });
             });
             //执行一个laydate实例
@@ -243,6 +243,7 @@ layui.use(['table'], function () {
                     $('.table-edit-input').each(function (index, val) {
                         data[val.dataset.type] = $(val).val();
                     });
+                    data.carTripId = carTripId;
                     ServerUtil.api('route/', 'save', data, function () {
                         //同步更新缓存对应的值
                         obj.update(data);
@@ -319,10 +320,10 @@ layui.use(['table'], function () {
             });
             setAllCity(allCity)
             var citySelect1 = new Vcity.CitySelector({
-                input: 'startStation'
+                input: 'startStationName'
             });
             var citySelect2 = new Vcity.CitySelector({
-                input: 'arriveStation'
+                input: 'arriveStationName'
             });
         });
         //执行一个laydate实例
@@ -353,6 +354,7 @@ layui.use(['table'], function () {
                 $('.table-add-input').each(function (index, val) {
                     obj[val.dataset.type] = $(val).val();
                 });
+                data.carTripId = carTripId;
                 ServerUtil.api('route/', 'save', obj, function () {
                     tableReload();
                     layer.close(index);

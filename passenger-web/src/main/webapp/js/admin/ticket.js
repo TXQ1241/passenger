@@ -202,6 +202,7 @@ layui.use(['table'], function () {
                     $('.table-edit-input').each(function (index, val) {
                         data[val.dataset.type] = $(val).val();
                     });
+                    data.routeId = routeId;
                     ServerUtil.api('ticket/', 'save', data, function () {
                         //同步更新缓存对应的值
                         obj.update(data);
@@ -277,6 +278,7 @@ layui.use(['table'], function () {
                 $('.table-add-input').each(function (index, val) {
                     obj[val.dataset.type] = $(val).val();
                 });
+                data.routeId = routeId;
                 ServerUtil.api('ticket/', 'save', obj, function () {
                     tableReload();
                     layer.close(index);
