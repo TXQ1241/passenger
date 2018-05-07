@@ -190,6 +190,37 @@ layui.use(['table'], function () {
             laytpl(getTpl).render(userList, function (html) {
                 view.innerHTML = html;
             });
+            //获取车站列表
+            ServerUtil.api('station/', 'getStationList', {}, function (result) {
+                var allCity = [];
+                result.datalist.forEach(function (station) {
+                    var arr = [station.name, station.pinyin, station.sanzima];
+                    var str = arr.join('|')
+                    allCity.push(str);
+                });
+                setAllCity(allCity)
+                var citySelect1 = new Vcity.CitySelector({
+                    input: 'startStationName'
+                });
+                var citySelect2 = new Vcity.CitySelector({
+                    input: 'arriveStationName'
+                });
+            });
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#startTimeStr', //指定元素
+                min: 0,
+                max: 30,
+                btns: ['confirm', 'now'],
+                type: 'time'
+            });
+            laydate.render({
+                elem: '#arriveTimeStr', //指定元素
+                min: 0,
+                max: 30,
+                btns: ['confirm', 'now'],
+                type: 'time'
+            });
             layer.open({
                 title: '编辑',
                 type: 1,
