@@ -22,8 +22,12 @@ public class CarTripVo extends PageVo {
     private String arriveStationName;
 
     private Date startTime;
+    
+    private String startTimeStr;
 
     private Date arriveTime;
+    
+    private String arriveTimeStr;
     
     public CarTripVo() {}
     public CarTripVo(CarTrip carTrip) {
@@ -104,6 +108,18 @@ public class CarTripVo extends PageVo {
 	}
 	public void setArriveStationName(String arriveStationName) {
 		this.arriveStationName = arriveStationName;
+	}
+	public String getStartTimeStr() {
+		return startTimeStr;
+	}
+	public void setStartTimeStr(String startTimeStr) {
+		this.startTimeStr = startTimeStr;
+	}
+	public String getArriveTimeStr() {
+		return arriveTimeStr;
+	}
+	public void setArriveTimeStr(String arriveTimeStr) {
+		this.arriveTimeStr = arriveTimeStr;
 	}
 	
     
