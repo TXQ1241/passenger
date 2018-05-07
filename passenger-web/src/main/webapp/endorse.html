@@ -165,7 +165,7 @@
                 $('#logout').on('click', function () {
                     ServerUtil.api('login/', 'logout', {}, function () {
                         window.location.href = window.location.origin +
-                            '/' + pageConfig + 'login.html';
+                            '/' + pageConfig.urlPrex + 'login.html';
                     });
                 });
                 isLogin = true;
@@ -188,7 +188,7 @@
         table.render({
             elem: '#datalist',
             // height: 315,
-            url: window.location.origin + '/' + pageConfig + 'arrvieStation/getArrvieStationList',
+            url: window.location.origin + '/' + pageConfig.urlPrex + 'arrvieStation/getArrvieStationList',
             method: 'post',
             response: {
                 statusCode: 1,
@@ -273,7 +273,7 @@
             var data = obj.data;
             if (obj.event === 'buy') {
                 if (!isLogin) {
-                    window.location.href = window.location.origin + '/' + pageConfig + 'login.html';
+                    window.location.href = window.location.origin + '/' + pageConfig.urlPrex + 'login.html';
                 } else {
                     ServerUtil.api('', '', {
 

@@ -149,7 +149,7 @@
 			str += '<div class="info-btn"><button id="edit">编辑</button></div>'
 			$('.info-main').html(str);
 			$('#edit').on('click', function () {
-				window.location.href = window.location.origin + '/' + pageConfig + 'informationEdit.html';
+				window.location.href = window.location.origin + '/' + pageConfig.urlPrex + 'informationEdit.html';
 			});
 		});
 
@@ -163,7 +163,7 @@
                 $('#logout').on('click', function () {
                     ServerUtil.api('login/', 'logout', {}, function () {
                         window.location.href = window.location.origin +
-                            '/' + pageConfig + 'login.html';
+                            '/' + pageConfig.urlPrex + 'login.html';
                     });
                 });
             }

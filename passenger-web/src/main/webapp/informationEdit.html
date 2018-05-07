@@ -157,7 +157,7 @@
 					phoneNum: $('#phoneNum').val(),
 					email: $('#email').val(),
 				}, function () {
-					window.location.href = window.location.origin + '/' + pageConfig + 'information.html';
+					window.location.href = window.location.origin + '/' + pageConfig.urlPrex + 'information.html';
 				});
 			});
 		});
@@ -172,7 +172,7 @@
                 $('#logout').on('click', function () {
                     ServerUtil.api('login/', 'logout', {}, function () {
                         window.location.href = window.location.origin +
-                            '/' + pageConfig + 'login.html';
+                            '/' + pageConfig.urlPrex + 'login.html';
                     });
                 });
             }

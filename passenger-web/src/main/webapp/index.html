@@ -123,7 +123,7 @@
                 $('#logout').on('click', function () {
                     ServerUtil.api('login/', 'logout', {}, function () {
                         window.location.href = window.location.origin +
-                            '/' + pageConfig + 'login.html';
+                            '/' + pageConfig.urlPrex + 'login.html';
                     });
                 });
             }
@@ -165,7 +165,7 @@
 					time: 1000
 				});
             } else {
-                window.location.href = window.location.origin + '/' + pageConfig +  'search.html?src=' + encodeURI(src) + '&target=' + encodeURI(target) + '&date=' + encodeURI(date);
+                window.location.href = window.location.origin + '/' + pageConfig.urlPrex +  'search.html?src=' + encodeURI(src) + '&target=' + encodeURI(target) + '&date=' + encodeURI(date);
             }
         });
     });

@@ -60,13 +60,13 @@ layui.use(['table'], function () {
         });
     });
     $('#logout').on('click', function () {
-        window.location.href = window.location.origin + '/' + pageConfig + 'login/logout';
+        window.location.href = window.location.origin + '/' + pageConfig.urlPrex + 'login/logout';
     });
     //第一个实例
     table.render({
         elem: '#datalist',
         // height: 315,
-        url: window.location.origin + '/' + pageConfig + 'user/userList',
+        url: window.location.origin + '/' + pageConfig.urlPrex + 'user/userList',
         method: 'post',
         response: {
             statusCode: 1,
