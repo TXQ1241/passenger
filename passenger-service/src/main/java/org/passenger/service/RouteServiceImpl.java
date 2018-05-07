@@ -1,6 +1,10 @@
 package org.passenger.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.passenger.dao.RouteMapper;
+import org.passenger.pojo.CarTrip;
 import org.passenger.pojo.Route;
 import org.passenger.pojo.Station;
 import org.passenger.utils.StringUtils;
@@ -9,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service("routeService")
 @Transactional
@@ -23,6 +25,10 @@ public class RouteServiceImpl implements IRouteService {
     @Autowired
     @Qualifier("stationService")
     IStationService stationService;
+    
+    @Autowired
+    @Qualifier("carTripService")
+    ICarTripService carTripService;
 
     public void deleteRouteByIds(String[] routeIds) {
         routeMapper.deleteRouteByIds(routeIds);
@@ -45,7 +51,19 @@ public class RouteServiceImpl implements IRouteService {
     }
 
     public List<RouteVo> getRouteVoList(RouteVo routeVo) {
-        return null;
+    	List<RouteVo> voList = new ArrayList<RouteVo> ();
+    	List<Route> routeList = this.getRouteList(routeVo);
+    	if(routeList != null && routeList.size() > 0) {
+    		for(Route route:routeList) {
+    			RouteVo vo = new RouteVo(route);
+    			if(StringUtils.isNotBlank(route.getCarTripId())) {
+    				CarTrip carTrip = carTripService.getCarTripById(route.getCarTripId());
+    				vo.setCarTripCode(carTrip.getCode());
+    			}
+    			voList.add(vo);
+    		}
+    	}
+        return voList;
     }
 
 	public void saveRoute(Route route) {

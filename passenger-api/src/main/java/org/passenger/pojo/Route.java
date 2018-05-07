@@ -11,7 +11,7 @@ public class Route {
 
     private Date arriveTime;
 
-    private String carTripCode;
+    private String carTripId;
 
     private Integer sort;
 
@@ -56,16 +56,16 @@ public class Route {
     public void setArriveTime(Date arriveTime) {
         this.arriveTime = arriveTime;
     }
+    
+    public String getCarTripId() {
+		return carTripId;
+	}
 
-    public String getCarTripCode() {
-        return carTripCode;
-    }
+	public void setCarTripId(String carTripId) {
+		this.carTripId = carTripId;
+	}
 
-    public void setCarTripCode(String carTripCode) {
-        this.carTripCode = carTripCode;
-    }
-
-    public Integer getSort() {
+	public Integer getSort() {
         return sort;
     }
 

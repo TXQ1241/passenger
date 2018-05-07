@@ -1,7 +1,6 @@
 package org.passenger.dao;
 
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 import org.passenger.pojo.Orders;
 import org.passenger.vo.OrderVo;
 import org.springframework.stereotype.Repository;

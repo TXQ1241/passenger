@@ -6,7 +6,7 @@
     <result column="start_station_id" property="startStationId" jdbcType="VARCHAR" />
     <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
     <result column="arrive_time" property="arriveTime" jdbcType="TIMESTAMP" />
-    <result column="car_trip_code" property="carTripCode" jdbcType="VARCHAR" />
+    <result column="car_trip_id" property="carTripId" jdbcType="VARCHAR" />
     <result column="sort" property="sort" jdbcType="INTEGER" />
     <result column="fare_code" property="fareCode" jdbcType="VARCHAR" />
     <result column="start_station_name" property="startStationName" jdbcType="VARCHAR" />
@@ -27,11 +27,11 @@
   <!-- 保存订单信息 -->
   <insert id="insert" parameterType="org.passenger.pojo.Route" >
     insert into route (id, start_station_id, start_time, 
-      arrive_time, car_trip_code, sort, 
+      arrive_time, car_trip_id, sort, 
       fare_code, start_station_name, arrive_station_id, 
       arrive_station_name, price)
     values (#{id,jdbcType=VARCHAR}, #{startStationId,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, 
-      #{arriveTime,jdbcType=TIMESTAMP}, #{carTripCode,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
+      #{arriveTime,jdbcType=TIMESTAMP}, #{carTripId,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
       #{fareCode,jdbcType=VARCHAR}, #{startStationName,jdbcType=VARCHAR}, #{arriveStationId,jdbcType=VARCHAR}, 
       #{arriveStationName,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE})
   </insert>
@@ -41,7 +41,7 @@
     set start_station_id = #{startStationId,jdbcType=VARCHAR},
       start_time = #{startTime,jdbcType=TIMESTAMP},
       arrive_time = #{arriveTime,jdbcType=TIMESTAMP},
-      car_trip_code = #{carTripCode,jdbcType=VARCHAR},
+      car_trip_id = #{carTripId,jdbcType=VARCHAR},
       sort = #{sort,jdbcType=INTEGER},
       fare_code = #{fareCode,jdbcType=VARCHAR},
       start_station_name = #{startStationName,jdbcType=VARCHAR},

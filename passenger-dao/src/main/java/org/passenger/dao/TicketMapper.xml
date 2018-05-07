@@ -5,9 +5,10 @@
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="route_id" property="routeId" jdbcType="VARCHAR" />
     <result column="ticket_date" property="ticketDate" jdbcType="DATE" />
+    <result column="number" property="number" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, route_id, ticket_date
+    id, route_id, ticket_date, number
   </sql>
   <!-- 获取车票脚本 -->
   <sql id="Get_Ticket_Sql">
@@ -19,13 +20,15 @@
   <insert id="insert" parameterType="org.passenger.pojo.Ticket" >
     insert into ticket (id, route_id, ticket_date, 
       number)
-    values (#{id,jdbcType=VARCHAR}, #{routeId,jdbcType=VARCHAR}, #{ticketDate,jdbcType=DATE})
+    values (#{id,jdbcType=VARCHAR}, #{routeId,jdbcType=VARCHAR}, #{ticketDate,jdbcType=DATE},
+    #{number,jdbcType=INTEGER})
   </insert>
   <!-- 更新车票数 -->
   <update id="update" parameterType="org.passenger.pojo.Ticket" >
     update ticket
     set route_id = #{routeId,jdbcType=VARCHAR},
-      ticket_date = #{ticketDate,jdbcType=DATE}
+      ticket_date = #{ticketDate,jdbcType=DATE},
+      number = #{number,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   
@@ -40,7 +43,7 @@
   	</if>
   </select>
   
-  <select id="getTicketById" resultMap = "BaseResultMap" parameter="java.lang.String">
+  <select id="getTicketById" resultMap = "BaseResultMap" parameterType="java.lang.String">
   	select * from ticket t where t.id = #{id}
   </select>
   

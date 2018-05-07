@@ -58,7 +58,7 @@
   </select>
   
   <!-- 通过id获取车站信息 -->
-  <select id="getStationById" resultMap = "BaseResultMap" parameterType="String.lang.String">
+  <select id="getStationById" resultMap = "BaseResultMap" parameterType="java.lang.String">
   	select * from station s where s.id=#{id}
   </select>
   

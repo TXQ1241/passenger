@@ -54,7 +54,7 @@ public class RouteController {
             routeVo.setPageNum((pageNum-1)*routeVo.getPageSize());
         }
         try {
-            List<Route> routeList = routeService.getRouteList(routeVo);
+            List<RouteVo> routeList = routeService.getRouteVoList(routeVo);
             dataVo.setDatalist(routeList);
             dataVo.setCode(Constants.DataCode.SUCCESS);
             dataVo.setMsg("数据获取成功");

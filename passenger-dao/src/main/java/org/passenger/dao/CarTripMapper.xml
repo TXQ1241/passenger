@@ -47,7 +47,7 @@
   	</if>
   </select>
   
-  <select id="getCarTripById" resultMap="BaseResultMap" parameterType="java.lang.String">
+  <select id="getCarTripById" resultMap="BaseResultMap" parameterType="java.lang.String" >
   	select * from car_trip ct where ct.id=#{id}
   </select>
   
