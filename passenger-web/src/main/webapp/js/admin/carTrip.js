@@ -264,6 +264,22 @@ layui.use(['table'], function () {
         laytpl(getTpl).render(userList, function (html) {
             view.innerHTML = html;
         });
+        //获取车站列表
+        ServerUtil.api('station/', 'getStationList', {}, function (result) {
+            var allCity = [];
+            result.datalist.forEach(function (station) {
+                var arr = [station.name, station.pinyin, station.sanzima];
+                var str = arr.join('|')
+                allCity.push(str);
+            });
+            setAllCity(allCity)
+            var citySelect1 = new Vcity.CitySelector({
+                input: 'startStation'
+            });
+            var citySelect2 = new Vcity.CitySelector({
+                input: 'arriveStation'
+            });
+        });
         layer.open({
             title: '新增',
             type: 1,

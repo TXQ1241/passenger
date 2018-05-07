@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../iconfont/iconfont.css">
     <link rel="stylesheet" href="../libs/layui/css/layui.css">
     <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="./css/cityselect.css">
 </head>
 
 <body class="layui-layout-body">
@@ -94,7 +95,7 @@
         <tr>
             <td>{{ item.title }}</td>
             <td>
-                <input type="text" data-type="{{item.field}}" value="{{ item.val }}" class="{{item.className}}">
+                <input type="text" data-type="{{item.field}}" value="{{ item.val }}" class="{{item.className}}" id="{{ item.field }}">
             </td>
         </tr>
         {{# }); }}
@@ -103,5 +104,6 @@
 <script src="../libs/layui/layui.all.js"></script>
 <script src="../js/ServerUtil.js"></script>
 <script src="../js/admin/carTrip.js"></script>
+<script src="./js/cityselect.js"></script>
 
 </html>
