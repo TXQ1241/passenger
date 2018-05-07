@@ -6,11 +6,9 @@
     <result column="code" property="code" jdbcType="VARCHAR" />
     <result column="start_station" property="startStation" jdbcType="VARCHAR" />
     <result column="arrive_station" property="arriveStation" jdbcType="VARCHAR" />
-    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
-    <result column="arrive_time" property="arriveTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, code, start_station, arrive_station, start_time, arrive_time, fare
+    id, code, start_station, arrive_station
   </sql>
   <!-- 获取车次信息脚本 -->
   <sql id="Get_CarTrip_Sql">
@@ -21,18 +19,16 @@
   <!-- 保存车次信息 -->
   <insert id="insert" parameterType="org.passenger.pojo.CarTrip" >
     insert into car_trip (id, code, start_station, 
-      arrive_station, start_time, arrive_time)
+      arrive_station)
     values (#{id,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{startStation,jdbcType=VARCHAR}, 
-      #{arriveStation,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{arriveTime,jdbcType=TIMESTAMP})
+      #{arriveStation,jdbcType=VARCHAR})
   </insert>
   <!-- 更新车次信息 -->
   <update id="update" parameterType="org.passenger.pojo.CarTrip" >
     update car_trip
     set code = #{code,jdbcType=VARCHAR},
       start_station = #{startStation,jdbcType=VARCHAR},
-      arrive_station = #{arriveStation,jdbcType=VARCHAR},
-      start_time = #{startTime,jdbcType=TIMESTAMP},
-      arrive_time = #{arriveTime,jdbcType=TIMESTAMP}
+      arrive_station = #{arriveStation,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <!-- 获取车次信息 -->

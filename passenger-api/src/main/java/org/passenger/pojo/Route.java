@@ -1,7 +1,6 @@
 package org.passenger.pojo;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Date;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.passenger.vo.RouteVo;
@@ -11,9 +10,9 @@ public class Route {
 
     private String startStationId;
 
-    private Date startTime;
+    private String startTime;
 
-    private Date arriveTime;
+    private String arriveTime;
 
     private String carTripId;
 
@@ -59,19 +58,19 @@ public class Route {
 		this.startStationId = startStationId;
 	}
 
-	public Date getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 
-	public Date getArriveTime() {
+	public String getArriveTime() {
 		return arriveTime;
 	}
 
-	public void setArriveTime(Date arriveTime) {
+	public void setArriveTime(String arriveTime) {
 		this.arriveTime = arriveTime;
 	}
 

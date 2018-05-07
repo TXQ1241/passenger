@@ -1,7 +1,6 @@
 package org.passenger.pojo;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Date;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.passenger.vo.CarTripVo;
@@ -14,10 +13,6 @@ public class CarTrip {
     private String startStation;
 
     private String arriveStation;
-
-    private Date startTime;
-
-    private Date arriveTime;
     
     public CarTrip() {}
     
@@ -65,19 +60,4 @@ public class CarTrip {
         this.arriveStation = arriveStation;
     }
 
-    public Date getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
-
-    public Date getArriveTime() {
-        return arriveTime;
-    }
-
-    public void setArriveTime(Date arriveTime) {
-        this.arriveTime = arriveTime;
-    }
 }

@@ -1,8 +1,6 @@
 package org.passenger.service;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.passenger.dao.RouteMapper;
@@ -63,19 +61,6 @@ public class RouteServiceImpl implements IRouteService {
     				vo.setCarTripCode(carTrip.getCode());
     			}
     			voList.add(vo);
-    			//设置时间
-    			if(route.getStartTime() != null) {
-    				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    				String startTimeStr = df.format(route.getStartTime());
-    				String [] times = startTimeStr.split(" ");
-    				vo.setStartTimeStr(times[1]);
-    			}
-    			if(route.getArriveTime() != null) {
-    				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    				String startTimeStr = df.format(route.getArriveTime());
-    				String [] times = startTimeStr.split(" ");
-    				vo.setArriveTimeStr(times[1]);
-    			}
     		}
     	}
         return voList;
@@ -97,17 +82,6 @@ public class RouteServiceImpl implements IRouteService {
 					Station arriveStation = stationList.get(0);
 					routeVo.setArriveStationId(arriveStation.getId());
 				}
-			}
-			//转换时间格式
-			if(StringUtils.isNotBlank(routeVo.getStartTimeStr())) {
-		        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("HH:mm:ss");
-		        Date date=simpleDateFormat.parse(routeVo.getStartTimeStr());
-		        routeVo.setStartTime(date);
-			}
-			if(StringUtils.isNotBlank(routeVo.getArriveTimeStr())) {
-		        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("HH:mm:ss");
-		        Date date=simpleDateFormat.parse(routeVo.getArriveTimeStr());
-		        routeVo.setArriveTime(date);
 			}
 			Route route = new Route(routeVo);
 			if(StringUtils.isNotBlank(route.getId())) {

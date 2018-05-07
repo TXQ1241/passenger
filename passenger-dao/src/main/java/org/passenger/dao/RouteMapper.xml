@@ -4,8 +4,8 @@
   <resultMap id="BaseResultMap" type="org.passenger.pojo.Route" >
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="start_station_id" property="startStationId" jdbcType="VARCHAR" />
-    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
-    <result column="arrive_time" property="arriveTime" jdbcType="TIMESTAMP" />
+    <result column="start_time" property="startTime" jdbcType="VARCHAR" />
+    <result column="arrive_time" property="arriveTime" jdbcType="VARCHAR" />
     <result column="car_trip_id" property="carTripId" jdbcType="VARCHAR" />
     <result column="sort" property="sort" jdbcType="INTEGER" />
     <result column="fare_code" property="fareCode" jdbcType="VARCHAR" />
@@ -30,8 +30,8 @@
       arrive_time, car_trip_id, sort, 
       fare_code, start_station_name, arrive_station_id, 
       arrive_station_name, price)
-    values (#{id,jdbcType=VARCHAR}, #{startStationId,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, 
-      #{arriveTime,jdbcType=TIMESTAMP}, #{carTripId,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=VARCHAR}, #{startStationId,jdbcType=VARCHAR}, #{startTime,jdbcType=VARCHAR}, 
+      #{arriveTime,jdbcType=VARCHAR}, #{carTripId,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
       #{fareCode,jdbcType=VARCHAR}, #{startStationName,jdbcType=VARCHAR}, #{arriveStationId,jdbcType=VARCHAR}, 
       #{arriveStationName,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE})
   </insert>
@@ -39,8 +39,8 @@
   <update id="update" parameterType="org.passenger.pojo.Route" >
     update route
     set start_station_id = #{startStationId,jdbcType=VARCHAR},
-      start_time = #{startTime,jdbcType=TIMESTAMP},
-      arrive_time = #{arriveTime,jdbcType=TIMESTAMP},
+      start_time = #{startTime,jdbcType=VARCHAR},
+      arrive_time = #{arriveTime,jdbcType=VARCHAR},
       car_trip_id = #{carTripId,jdbcType=VARCHAR},
       sort = #{sort,jdbcType=INTEGER},
       fare_code = #{fareCode,jdbcType=VARCHAR},
