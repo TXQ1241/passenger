@@ -357,9 +357,9 @@ layui.use(['table'], function () {
 
     //菜单跳转
     $('#systemUser').on('click', function () {
-        window.location.href = window.location.origin + window.location.pathname + '?userType=1';
+        window.location.href = window.location.origin + '/passenger-web/user/?userType=1';
     });
     $('#station').on('click', function () {
-        window.location.href = window.location.origin + window.location.pathname + '?userType=2';
+        window.location.href = window.location.origin + '/passenger-web/user/?userType=2';
     });
 });

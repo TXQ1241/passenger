@@ -63,7 +63,7 @@ layui.use(['table'], function () {
     //获取线路id
     var routeId;
     ServerUtil.api('ticket/', 'getRouteId', {}, function (result) {
-        routeId = result;
+        routeId = result.routeId;
     });
     //第一个实例
     table.render({
@@ -292,12 +292,12 @@ layui.use(['table'], function () {
 
     //菜单跳转
     $('#systemUser').on('click', function () {
-        window.location.href = window.location.origin + window.location.pathname + '?userType=1';
+        window.location.href = window.location.origin + '/passenger-web/user/?userType=1';
     });
     $('#station').on('click', function () {
-        window.location.href = window.location.origin + window.location.pathname + '?userType=2';
+        window.location.href = window.location.origin + '/passenger-web/user/?userType=2';
     });
     $('#carTrip').on('click', function () {
-        window.location.href = window.location.origin + window.location.pathname + '?userType=3';
+        window.location.href = window.location.origin + '/passenger-web/user/?userType=3';
     });
 });
