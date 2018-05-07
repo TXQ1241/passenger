@@ -11,7 +11,7 @@ ServerUtil = {
 
     url: function () {
         var u = window.location.origin;
-        u += pageConfig.urlPrex;
+        u =u + '/' + pageConfig.urlPrex;
         if (!u.endsWith('/')) {
             u += '/';
         }
