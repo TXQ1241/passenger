@@ -44,4 +44,10 @@ public interface IRouteService {
      * @return
      */
     List<RouteVo> getRouteVoList(RouteVo routeVo);
+    
+    /**
+     * 保存路径信息
+     * @param route
+     */
+	void saveRoute(Route route);
 }

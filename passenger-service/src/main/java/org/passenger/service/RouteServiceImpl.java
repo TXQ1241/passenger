@@ -2,6 +2,8 @@ package org.passenger.service;
 
 import org.passenger.dao.RouteMapper;
 import org.passenger.pojo.Route;
+import org.passenger.pojo.Station;
+import org.passenger.utils.StringUtils;
 import org.passenger.vo.RouteVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,6 +19,10 @@ public class RouteServiceImpl implements IRouteService {
     @Autowired
     @Qualifier("routeMapper")
     RouteMapper routeMapper;
+    
+    @Autowired
+    @Qualifier("stationService")
+    IStationService stationService;
 
     public void deleteRouteByIds(String[] routeIds) {
         routeMapper.deleteRouteByIds(routeIds);
@@ -41,4 +47,28 @@ public class RouteServiceImpl implements IRouteService {
     public List<RouteVo> getRouteVoList(RouteVo routeVo) {
         return null;
     }
+
+	public void saveRoute(Route route) {
+		//车次中设置车站名称
+		if(StringUtils.isNotBlank(route.getStartStationName())) {
+			List<Station> stationList = stationService.getStationByName(route.getStartStationName());
+			if(stationList != null && stationList.size() > 0) {
+				Station startStation = stationList.get(0);
+				route.setStartStationId(startStation.getId());
+			}
+		}
+		if(StringUtils.isNotBlank(route.getArriveStationName())) {
+			List<Station> stationList = stationService.getStationByName(route.getArriveStationName());
+			if(stationList != null && stationList.size() > 0) {
+				Station arriveStation = stationList.get(0);
+				route.setArriveStationId(arriveStation.getId());
+			}
+		}
+		if(StringUtils.isNotBlank(route.getId())) {
+			this.update(route);
+		} else {
+			route.setId(StringUtils.getUUID());
+			this.save(route);
+		}
+	}
 }

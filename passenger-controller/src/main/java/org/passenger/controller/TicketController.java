@@ -17,6 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 @RequestMapping("/ticket/")
 public class TicketController {
@@ -24,6 +26,18 @@ public class TicketController {
 	@Autowired 
 	@Qualifier("ticketService")
 	ITicketService ticketService;
+	
+	@RequestMapping("setRouteId")
+	public String setRouteId(HttpServletRequest request,String routeId) {
+		request.getSession().setAttribute(Constants.TicketConstants.ROUTE_ID, routeId);
+		return "ticket";
+	}
+	
+	@RequestMapping("getRouteId")
+	@ResponseBody
+	public String setRouteId(HttpServletRequest request) {
+		return (String) request.getSession().getAttribute(Constants.TicketConstants.ROUTE_ID);
+	}
 
 	/**
 	 * 获取票数信息（分页）

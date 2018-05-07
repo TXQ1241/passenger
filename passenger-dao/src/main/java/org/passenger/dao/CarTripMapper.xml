@@ -47,6 +47,10 @@
   	</if>
   </select>
   
+  <select id="getCarTripById" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select * from car_trip ct where ct.id=#{id}
+  </select>
+  
     <!-- 获取车次记录数 -->
   <select id="getCarTripCount" resultType="java.lang.Integer" parameterType="org.passenger.vo.CarTripVo">
   	select count(*) from car_trip ct
@@ -57,9 +61,9 @@
   
   <!-- 批量删除车次信息 -->
   <delete id="deleteCarTripByIds" parameterType="java.lang.String">
-  	delete from car_trip ct
+  	delete from car_trip
   	<where>
-      ct.id in
+      id in
       <foreach collection="array" item="id" separator="," open="(" close=")">
         #{id}
       </foreach>

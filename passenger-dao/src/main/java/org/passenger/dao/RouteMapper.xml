@@ -72,9 +72,9 @@
   
   <!-- 批量删除线路信息 -->
   <delete id="deleteRouteByIds" parameterType="java.lang.String">
-  	delete from route r
+  	delete from route 
   	<where>
-  		r.id in
+  		id in
       <foreach collection="array" item="id" separator="," open="(" close=")">
         #{id}
       </foreach>

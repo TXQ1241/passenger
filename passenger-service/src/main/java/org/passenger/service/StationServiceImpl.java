@@ -2,7 +2,6 @@ package org.passenger.service;
 
 import org.passenger.dao.StationMapper;
 import org.passenger.pojo.Station;
-import org.passenger.pojo.User;
 import org.passenger.vo.StationVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -38,4 +37,12 @@ public class StationServiceImpl implements IStationService {
     public void deleteStationByIds(String[] stationIds) {
         stationMapper.deleteStationByIds(stationIds);
     }
+
+	public Station getStationById(String id) {
+		return stationMapper.getStationById(id);
+	}
+
+	public List<Station> getStationByName(String stationName) {
+		return stationMapper.getStationByName(stationName);
+	}
 }

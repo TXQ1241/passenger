@@ -37,4 +37,8 @@ public class TriketServiceImpl implements ITicketService {
     public void deleteTicketByIds(String[] ticketIds) {
         ticketMapper.deleteTicketByIds(ticketIds);
     }
+
+	public Ticket getTicketById(String ticketId) {
+		return ticketMapper.getTicketById(ticketId);
+	}
 }

@@ -43,4 +43,24 @@ public interface ICarTripService {
      * @param carTripIds
      */
     void deleteCarTripByIds(String[] carTripIds);
+    
+    /**
+     * 获取车次信息
+     * @param carTripVo
+     * @return
+     */
+	List<CarTripVo> getCarTripVos(CarTripVo carTripVo);
+	
+	/**
+	 * 通过id获取车次信息
+	 * @param carTripId
+	 * @return
+	 */
+	CarTrip getCarTripById(String carTripId);
+	
+	/**
+	 * 保存或更新车次信息
+	 * @param carTrip
+	 */
+	void saveCarTrip(CarTripVo carTripVo);
 }
