@@ -65,7 +65,7 @@ layui.use(['table'], function () {
     table.render({
         elem: '#datalist',
         // height: 315,
-        url: window.location.origin + '/' + pageConfig.urlPrex + 'user/userList',
+        url: window.location.origin + '/' + pageConfig.urlPrex + 'cartrip/getCarTripList',
         method: 'post',
         response: {
             statusCode: 1,
