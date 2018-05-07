@@ -40,7 +40,8 @@ public class Constants {
          */
         String SYSTEM_ADMIN = "0"; //系统管理员
         String GENERAL_USER = "1"; //普通用户
-        String TICKET = "2"; //车次管理
+        String STATION = "2"; //车站管理
+        String CARTRIP = "3"; //车次管理
         
     }
 	

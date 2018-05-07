@@ -30,13 +30,11 @@ public class UserController {
     @RequestMapping("view")
     public String toUserList(String userType){
         String page = "admin";
-        if (userType != null && Constants.UserConstants.GENERAL_USER.
-                equals(userType)) {
-            page = "";
-        } else if (userType != null && Constants.UserConstants.TICKET.
-                equals(userType)) {
-        	page = "";
-        } 
+        if (Constants.UserConstants.STATION.equals(userType)) {
+        	page = "station";
+        } else if (Constants.UserConstants.CARTRIP.equals(userType)){
+            page = "carTrip";
+        }
         return page;
     }
 	
