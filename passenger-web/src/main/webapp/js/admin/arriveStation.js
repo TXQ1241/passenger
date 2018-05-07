@@ -65,7 +65,7 @@ layui.use(['table'], function () {
     //获取车次id
     var carTripId;
     ServerUtil.api('route/', 'getCarTripId', {}, function (result) {
-        carTripId = result;
+        carTripId = result.carTripId;
     });
     //第一个实例
     table.render({
