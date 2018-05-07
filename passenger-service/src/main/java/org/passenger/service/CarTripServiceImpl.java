@@ -62,10 +62,35 @@ public class CarTripServiceImpl implements ICarTripService {
 				voList.add(vo);
 			}
 		}
-		return null;
+		return voList;
 	}
 
 	public CarTrip getCarTripById(String carTripId) {
 		return carTripMapper.getCarTripById(carTripId);
+	}
+
+	public void saveCarTrip(CarTripVo carTripVo) {
+		//车次中设置车站名称
+		if(StringUtils.isNotBlank(carTripVo.getStartStationName())) {
+			List<Station> stationList = stationService.getStationByName(carTripVo.getStartStationName());
+			if(stationList != null && stationList.size() > 0) {
+				Station startStation = stationList.get(0);
+				carTripVo.setStartStation(startStation.getId());
+			}
+		}
+		if(StringUtils.isNotBlank(carTripVo.getArriveStationName())) {
+			List<Station> stationList = stationService.getStationByName(carTripVo.getArriveStationName());
+			if(stationList != null && stationList.size() > 0) {
+				Station arriveStation = stationList.get(0);
+				carTripVo.setArriveStation(arriveStation.getId());
+			}
+		}
+		CarTrip carTrip = new CarTrip(carTripVo);
+		if(StringUtils.isNotBlank(carTrip.getId())) {
+			this.update(carTrip);
+		} else {
+			carTrip.setId(StringUtils.getUUID());
+			this.save(carTrip);
+		}
 	}
 }

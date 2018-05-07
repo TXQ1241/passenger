@@ -50,5 +50,12 @@ public interface IStationService {
      * @return
      */
 	Station getStationById(String id);
+	
+	/**
+	 * 通过名称获取车站信息
+	 * @param startStationName
+	 * @return
+	 */
+	List<Station> getStationByName(String stationName);
    
 }

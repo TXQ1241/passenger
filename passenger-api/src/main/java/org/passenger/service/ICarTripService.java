@@ -57,4 +57,10 @@ public interface ICarTripService {
 	 * @return
 	 */
 	CarTrip getCarTripById(String carTripId);
+	
+	/**
+	 * 保存或更新车次信息
+	 * @param carTrip
+	 */
+	void saveCarTrip(CarTripVo carTripVo);
 }

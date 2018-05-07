@@ -12,7 +12,7 @@ import org.passenger.service.IRouteService;
 import org.passenger.utils.StringUtils;
 import org.passenger.vo.DataVo;
 import org.passenger.vo.RouteVo;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired; 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -81,12 +81,7 @@ public class RouteController {
     public Map<String, String> saveRoute(@RequestBody Route route){
         Map<String, String> msgMap = new HashMap<String, String>();
         try {
-            if (StringUtils.isNotBlank(route.getId())) {
-                routeService.update(route);
-            } else {
-                route.setId(StringUtils.getUUID());
-                routeService.save(route);
-            }
+            routeService.saveRoute(route);
             msgMap.put(Constants.AjaxStatus.AJAX_SUCCESS,"保存票数信息成功");
         } catch (Exception e) {
             msgMap.put(Constants.AjaxStatus.AJAX_FAIL,"保存票数信息失败");

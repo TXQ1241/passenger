@@ -41,4 +41,8 @@ public class StationServiceImpl implements IStationService {
 	public Station getStationById(String id) {
 		return stationMapper.getStationById(id);
 	}
+
+	public List<Station> getStationByName(String stationName) {
+		return stationMapper.getStationByName(stationName);
+	}
 }

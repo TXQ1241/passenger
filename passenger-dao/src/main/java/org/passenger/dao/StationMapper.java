@@ -20,4 +20,6 @@ public interface StationMapper {
     void deleteStationByIds(String[] ids);
 
 	Station getStationById(String id);
+
+	List<Station> getStationByName(String stationName);
 }

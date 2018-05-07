@@ -4,6 +4,7 @@ import org.passenger.common.Constants;
 import org.passenger.pojo.Orders;
 import org.passenger.pojo.User;
 import org.passenger.service.IOrderService;
+import org.passenger.utils.StringUtils;
 import org.passenger.vo.DataVo;
 import org.passenger.vo.OrderVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,28 +65,15 @@ public class OrderController {
 	public Map<String, String> saveOrder(@RequestBody Orders orders) {
 		Map<String, String> msgMap = new HashMap<String, String>();
 		try {
-			orderService.save(orders);
+			if(StringUtils.isNotBlank(orders.getId())) {
+				orderService.update(orders);
+			} else {
+				orders.setId(StringUtils.getUUID());
+				orderService.save(orders);
+			}
 			msgMap.put(Constants.AjaxStatus.AJAX_SUCCESS,"删除订单信息成功");
 		} catch (Exception e) {
 			msgMap.put(Constants.AjaxStatus.AJAX_FAIL,"删除订单信息失败");
-		}
-		return msgMap;
-	}
-
-	/**
-	 * 改签订单信息
-	 * @param order
-	 * @return
-	 */
-	@RequestMapping("change")
-	@ResponseBody
-	public Map<String, String> changeOrder(Orders order) {
-		Map<String, String> msgMap = new HashMap<String, String>();
-		try {
-
-			msgMap.put(Constants.AjaxStatus.AJAX_SUCCESS,"改签成功");
-		} catch (Exception e) {
-			msgMap.put(Constants.AjaxStatus.AJAX_FAIL,"改签失败");
 		}
 		return msgMap;
 	}

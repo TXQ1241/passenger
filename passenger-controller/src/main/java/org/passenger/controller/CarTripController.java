@@ -1,7 +1,6 @@
 package org.passenger.controller;
 
 import org.passenger.common.Constants;
-import org.passenger.pojo.CarTrip;
 import org.passenger.service.ICarTripService;
 import org.passenger.utils.StringUtils;
 import org.passenger.vo.CarTripVo;
@@ -56,15 +55,10 @@ public class CarTripController {
 
     @RequestMapping("save")
     @ResponseBody
-    public Map<String, String> saveCarTrip(@RequestBody CarTrip carTrip){
+    public Map<String, String> saveCarTrip(@RequestBody CarTripVo carTripVo){
         Map<String, String> msgMap = new HashMap<String, String>();
         try {
-            if (StringUtils.isNotBlank(carTrip.getId())) {
-                carTripService.update(carTrip);
-            } else {
-                carTrip.setId(StringUtils.getUUID());
-                carTripService.save(carTrip);
-            }
+               carTripService.saveCarTrip(carTripVo);
             msgMap.put(Constants.AjaxStatus.AJAX_SUCCESS,"保存车次信息成功");
         } catch (Exception e) {
             msgMap.put(Constants.AjaxStatus.AJAX_FAIL,"保存车次信息失败");
