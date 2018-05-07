@@ -5,7 +5,7 @@ public class UserVo extends PageVo {
 	private String id;
 	private String ids;
 	private String account;
-	private String name;
+	private String userName;
 	public String getId() {
 		return id;
 	}
@@ -24,11 +24,12 @@ public class UserVo extends PageVo {
 	public void setAccount(String account) {
 		this.account = account;
 	}
-	public String getName() {
-		return name;
+
+	public String getUserName() {
+		return userName;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-	
 }
