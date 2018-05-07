@@ -1,8 +1,6 @@
 package org.passenger.service;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.passenger.dao.CarTripMapper;
@@ -62,19 +60,6 @@ public class CarTripServiceImpl implements ICarTripService {
 					Station station = stationService.getStationById(vo.getArriveStation());
 					vo.setArriveStationName(station.getName());
 				}
-				//设置时间
-				if(carTrip.getStartTime() != null) {
-					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					String startTimeStr = df.format(carTrip.getStartTime());
-					String [] times = startTimeStr.split(" ");
-					vo.setStartTimeStr(times[1]);
-				}
-				if(carTrip.getArriveTime() != null) {
-					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					String startTimeStr = df.format(carTrip.getArriveTime());
-					String [] times = startTimeStr.split(" ");
-					vo.setArriveTimeStr(times[1]);
-				}
 				voList.add(vo);
 			}
 		}
@@ -101,17 +86,6 @@ public class CarTripServiceImpl implements ICarTripService {
 					Station arriveStation = stationList.get(0);
 					carTripVo.setArriveStation(arriveStation.getId());
 				}
-			}
-			//转换时间格式
-			if(StringUtils.isNotBlank(carTripVo.getStartTimeStr())) {
-		        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("HH:mm:ss");
-		        Date date=simpleDateFormat.parse(carTripVo.getStartTimeStr());
-		        carTripVo.setStartTime(date);
-			}
-			if(StringUtils.isNotBlank(carTripVo.getArriveTimeStr())) {
-		        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("HH:mm:ss");
-		        Date date=simpleDateFormat.parse(carTripVo.getArriveTimeStr());
-		        carTripVo.setArriveTime(date);
 			}
 			CarTrip carTrip = new CarTrip(carTripVo);
 			if(StringUtils.isNotBlank(carTrip.getId())) {

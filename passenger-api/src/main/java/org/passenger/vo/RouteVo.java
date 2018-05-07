@@ -13,10 +13,8 @@ public class RouteVo extends PageVo {
     private String startStationName;//始发站名称
     private String arriveStationId;//到达站id
     private String arriveStationName;//到达站名称
-    private Date startTime;//始发时间
-    private String startTimeStr;
-    private Date arriveTime;//到达时间
-    private String arriveTimeStr;//
+    private String startTime;//始发时间
+    private String arriveTime;//到达时间
     private Integer ticketNum;//票数
     private Double price;//票价
     private String carTripCode;//车次编码
@@ -74,24 +72,24 @@ public class RouteVo extends PageVo {
     public void setArriveStationName(String arriveStationName) {
         this.arriveStationName = arriveStationName;
     }
+    
+    public String getStartTime() {
+		return startTime;
+	}
 
-    public Date getStartTime() {
-        return startTime;
-    }
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
 
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
+	public String getArriveTime() {
+		return arriveTime;
+	}
 
-    public Date getArriveTime() {
-        return arriveTime;
-    }
+	public void setArriveTime(String arriveTime) {
+		this.arriveTime = arriveTime;
+	}
 
-    public void setArriveTime(Date arriveTime) {
-        this.arriveTime = arriveTime;
-    }
-
-    public Integer getTicketNum() {
+	public Integer getTicketNum() {
         return ticketNum;
     }
 
@@ -131,20 +129,4 @@ public class RouteVo extends PageVo {
         this.date = date;
     }
 
-	public String getStartTimeStr() {
-		return startTimeStr;
-	}
-
-	public void setStartTimeStr(String startTimeStr) {
-		this.startTimeStr = startTimeStr;
-	}
-
-	public String getArriveTimeStr() {
-		return arriveTimeStr;
-	}
-
-	public void setArriveTimeStr(String arriveTimeStr) {
-		this.arriveTimeStr = arriveTimeStr;
-	}
-    
 }
