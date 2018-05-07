@@ -29,14 +29,19 @@ public class RouteController {
     
     @RequestMapping("setCarTripId")
     public String setCarTripId(HttpServletRequest request,String carTripId) {
-    	request.setAttribute(Constants.RouteConstants.CAR_TRIP_ID,carTripId);
+    	request.getSession().getServletContext()
+    			.setAttribute(Constants.RouteConstants.CAR_TRIP_ID,carTripId);
     	return "arriveStation";
     }
     
     @RequestMapping("getCarTripId")
     @ResponseBody
-    public String getCarTripId(HttpServletRequest request) {
-    	return (String) request.getSession().getAttribute(Constants.RouteConstants.CAR_TRIP_ID);
+    public Map<String, String> getCarTripId(HttpServletRequest request) {
+    	Map<String, String> msgMap = new HashMap<String, String>();
+    	String carTripId = (String) request.getSession().getServletContext()
+    			.getAttribute(Constants.RouteConstants.CAR_TRIP_ID);
+    	msgMap.put(Constants.RouteConstants.CAR_TRIP_ID, carTripId);
+    	return msgMap;
     }
     
     /**
