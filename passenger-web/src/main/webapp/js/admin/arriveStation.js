@@ -5,6 +5,7 @@ layui.use(['table'], function () {
     $ = layui.$;
     var laytpl = layui.laytpl;
     var element = layui.element;
+    var laydate = layui.laydate;
     var tableTitle = {
         startStation: '始发站',
         arriveStation: '终点站',
