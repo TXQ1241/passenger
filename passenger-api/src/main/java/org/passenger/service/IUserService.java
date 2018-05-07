@@ -46,4 +46,15 @@ public interface IUserService {
 	 */
 	void deleteUsersByIds(String[] userIds);
 
+	/**
+	 * 保存用户
+	 * @param user
+	 */
+    void save(User user);
+
+	/**
+	 * 更新用户
+	 * @param user
+	 */
+	void update(User user);
 }
