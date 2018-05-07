@@ -29,14 +29,18 @@ public class TicketController {
 	
 	@RequestMapping("setRouteId")
 	public String setRouteId(HttpServletRequest request,String routeId) {
-		request.getSession().setAttribute(Constants.TicketConstants.ROUTE_ID, routeId);
+		request.getSession().getServletContext().
+			setAttribute(Constants.TicketConstants.ROUTE_ID, routeId);
 		return "ticket";
 	}
 	
 	@RequestMapping("getRouteId")
 	@ResponseBody
-	public String setRouteId(HttpServletRequest request) {
-		return (String) request.getSession().getAttribute(Constants.TicketConstants.ROUTE_ID);
+	public Map<String, String> setRouteId(HttpServletRequest request) {
+		Map<String, String> msgMap = new HashMap<String, String>();
+		String routeId = (String) request.getSession().getAttribute(Constants.TicketConstants.ROUTE_ID);
+		msgMap.put(Constants.TicketConstants.ROUTE_ID, routeId);
+		return msgMap;
 	}
 
 	/**
