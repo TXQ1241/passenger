@@ -16,6 +16,9 @@
   	<if test="code != null and code != ''">
         and s.code like '%${code}%'
   	</if>
+    <if test="name != null and name != ''">
+        and s.name like '%${name}%'
+    </if>
   </sql>
   <!-- 保存车站信息 -->
   <insert id="insert" parameterType="org.passenger.pojo.Station" >
