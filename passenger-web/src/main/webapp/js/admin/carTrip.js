@@ -10,8 +10,8 @@ layui.use(['table'], function () {
         code: '车次',
         startStationName: '始发站',
         arriveStationName: '终点站',
-        startTime: '始发时间',
-        arriveTime: '到达时间'
+        startTimeStr: '始发时间',
+        arriveTimeStr: '到达时间'
     };
     var userInfo;
     //获取用户信息
@@ -103,11 +103,11 @@ layui.use(['table'], function () {
                     title: '终点站',
                     // width: 150
                 }, {
-                    field: 'startTime',
+                    field: 'startTimeStr',
                     title: '始发时间',
                     // width: 200
                 }, {
-                    field: 'arriveTime',
+                    field: 'arriveTimeStr',
                     title: '到达时间',
                     sort: true,
                     // width: 200
@@ -285,7 +285,7 @@ layui.use(['table'], function () {
         });
         //执行一个laydate实例
         laydate.render({
-            elem: '#startTime', //指定元素
+            elem: '#startTimeStr', //指定元素
             min: 0,
             max: 30,
             value: new Date(),
@@ -293,7 +293,7 @@ layui.use(['table'], function () {
             type: 'time'
         });
         laydate.render({
-            elem: '#arriveTime', //指定元素
+            elem: '#arriveTimeStr', //指定元素
             min: 0,
             max: 30,
             value: new Date(),
