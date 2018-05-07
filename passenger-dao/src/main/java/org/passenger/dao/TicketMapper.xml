@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.passenger.dao.TicketMapper" >
+  <resultMap id="BaseResultMap" type="org.passenger.pojo.Ticket" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="pass_station_id" property="passStationId" jdbcType="VARCHAR" />
+    <result column="ticket_date" property="ticketDate" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, pass_station_id, ticket_date
+  </sql>
+  <!-- 获取车票脚本 -->
+  <sql id="Get_Ticket_Sql">
+  	<if test="passStationId != null and passStationId != ''">
+  		and t.pass_station_id = #{passStationId}
+  	</if>
+  </sql>
+  <!-- 新增车票数 -->
+  <insert id="insert" parameterType="org.passenger.pojo.Ticket" >
+    insert into ticket (id, pass_station_id, ticket_date, 
+      number)
+    values (#{id,jdbcType=VARCHAR}, #{passStationId,jdbcType=VARCHAR}, #{ticketDate,jdbcType=DATE})
+  </insert>
+  <!-- 更新车票数 -->
+  <update id="update" parameterType="org.passenger.pojo.Ticket" >
+    update ticket
+    set pass_station_id = #{passStationId,jdbcType=VARCHAR},
+      ticket_date = #{ticketDate,jdbcType=DATE}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- 获取车票信息 -->
+  <select id="getTicketList" resultMap="BaseResultMap" parameterMap="org.passenger.vo.TicketVo">
+  	select * from ticket t
+  	<where>
+  		<include refid="Get_Ticket_Sql"></include>
+  	</where>
+  	limit #{pageNum},#{pageSize}
+  </select>
+    <!-- 获取车票记录数 -->
+  <select id="getTicketList" resultType="java.lang.Integer" parameterMap="org.passenger.vo.TicketVo">
+  	select count(*) from ticket t
+  	<where>
+  		<include refid="Get_Ticket_Sql"></include>
+  	</where>
+  </select>
+  
+  <!-- 批量删除票数 -->
+  <delete id="deleteTicketByIds">
+  	delete from ticket t
+  	<where>
+      t.id in
+      <foreach collection="array" item="id" separator="," open="(" close=")">
+        #{id}
+      </foreach>
+    </where>
+  </delete>
+</mapper>

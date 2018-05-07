@@ -17,6 +17,10 @@ public class Orders {
 
     private String carTripId;
 
+    private String startStationName;
+
+    private String arriveStationName;
+
     public String getId() {
         return id;
     }
@@ -71,5 +75,21 @@ public class Orders {
 
     public void setCarTripId(String carTripId) {
         this.carTripId = carTripId;
+    }
+
+    public String getStartStationName() {
+        return startStationName;
+    }
+
+    public void setStartStationName(String startStationName) {
+        this.startStationName = startStationName;
+    }
+
+    public String getArriveStationName() {
+        return arriveStationName;
+    }
+
+    public void setArriveStationName(String arriveStationName) {
+        this.arriveStationName = arriveStationName;
     }
 }

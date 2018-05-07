@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.passenger.dao.OrdersMapper" >
+    <resultMap id="BaseResultMap" type="org.passenger.pojo.Orders">
+        <result column="id" jdbcType="VARCHAR" property="id" />
+        <result column="fare_code" jdbcType="VARCHAR" property="fareCode" />
+        <result column="user_id" jdbcType="VARCHAR" property="userId" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="ticket_id" jdbcType="VARCHAR" property="ticketId" />
+        <result column="status" jdbcType="VARCHAR" property="status" />
+        <result column="car_trip_id" jdbcType="VARCHAR" property="carTripId" />
+        <result column="start_station_name" jdbcType="VARCHAR" property="startStationName" />
+        <result column="arrive_station_name" jdbcType="VARCHAR" property="arriveStationName" />
+    </resultMap>
+  
+  <!-- 查询订单脚本 -->
+  <sql id="Get_Orders_Sql">
+  	<if test="userId != null and userId != ''">
+  		and o.user_id = #{userId}
+  	</if>
+  </sql>
+  
+  <!-- 插入订单信息 -->
+  <insert id="insert" parameterType="org.passenger.pojo.Orders">
+    insert into orders (id, fare_code, user_id,
+      create_time, ticket_id, status,
+      car_trip_id, start_station_name, arrive_station_name
+      )
+    values (#{id,jdbcType=VARCHAR}, #{fareCode,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP}, #{ticketId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
+      #{carTripId,jdbcType=VARCHAR}, #{startStationName,jdbcType=VARCHAR}, #{arriveStationName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <!-- 跟新订单信息 -->
+  <update id="update" parameterType="org.passenger.pojo.Orders" >
+    update orders
+    set id = #{record.id,jdbcType=VARCHAR},
+      fare_code = #{record.fareCode,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      ticket_id = #{record.ticketId,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      car_trip_id = #{record.carTripId,jdbcType=VARCHAR}
+      start_station_name = #{record.startStationName,jdbcType=VARCHAR},
+      arrive_station_name = #{record.arriveStationName,jdbcType=VARCHAR}
+	where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- 获取订单记录 -->
+  <select id="getOrders" resultMap="BaseResultMap" parameterType = "org.passenger.vo.OrderVo" >
+  	select * from orders o 
+  	<where>
+  		<include refid="Get_Orders_Sql"></include>
+  	</where>
+  	limit #{pageNum},#{pageSize}
+  </select>
+  
+  <!-- 获取订单记录数 -->
+  <select id="getOrderCount" resultType="">
+  	select count(*) from orders o
+  	<where>
+  		<include refid="Get_Orders_Sql"></include>
+  	</where>
+  </select>
+  
+  
+</mapper>

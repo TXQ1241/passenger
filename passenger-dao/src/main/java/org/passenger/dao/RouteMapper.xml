@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.passenger.dao.RouteMapper" >
+  <resultMap id="BaseResultMap" type="org.passenger.pojo.Route" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="start_station_id" property="startStationId" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="arrive_time" property="arriveTime" jdbcType="TIMESTAMP" />
+    <result column="car_trip_code" property="carTripCode" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="fare_code" property="fareCode" jdbcType="VARCHAR" />
+    <result column="start_station_name" property="startStationName" jdbcType="VARCHAR" />
+    <result column="arrive_station_id" property="arriveStationId" jdbcType="VARCHAR" />
+    <result column="arrive_station_name" property="arriveStationName" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+  </resultMap>
+  
+  <sql id="Get_Route_Sql">
+  	<if test="startStationName != null and startStationName != ''">
+  		and r.start_station_name like '%${startStationName}%'
+  	</if>
+  	<if test="arriveStationName != null and arriveStationName != ''">
+  		and r.arrive_station_name like '%${arriveStationName}%'
+  	</if>
+  </sql>
+	
+  <!-- 保存订单信息 -->
+  <insert id="insert" parameterType="org.passenger.pojo.Route" >
+    insert into route (id, start_station_id, start_time, 
+      arrive_time, car_trip_code, sort, 
+      fare_code, start_station_name, arrive_station_id, 
+      arrive_station_name, price)
+    values (#{id,jdbcType=VARCHAR}, #{startStationId,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{arriveTime,jdbcType=TIMESTAMP}, #{carTripCode,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
+      #{fareCode,jdbcType=VARCHAR}, #{startStationName,jdbcType=VARCHAR}, #{arriveStationId,jdbcType=VARCHAR}, 
+      #{arriveStationName,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE})
+  </insert>
+  <!-- 更新订单信息 -->
+  <update id="update" parameterType="org.passenger.pojo.Route" >
+    update route
+    set start_station_id = #{startStationId,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      arrive_time = #{arriveTime,jdbcType=TIMESTAMP},
+      car_trip_code = #{carTripCode,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      fare_code = #{fareCode,jdbcType=VARCHAR},
+      start_station_name = #{startStationName,jdbcType=VARCHAR},
+      arrive_station_id = #{arriveStationId,jdbcType=VARCHAR},
+      arrive_station_name = #{arriveStationName,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- 获取线路信息 -->
+  <select id="getRouteList" resultMap="BaseResultMap" parameterType="org.passenger.vo.RouteVo">
+  	select * from route r 
+  	<where>
+  		<include refid="Get_Route_Sql"></include>
+  	</where>
+  	limit #{pageNum},#{pageSize}
+  </select>
+  
+  <!-- 获取线路数 -->
+  <select id="getRouteList" resultType="java.lang.Integer" parameterType="org.passenger.vo.RouteVo">
+  	select count(*) from route r 
+  	<where>
+  		<include refid="Get_Route_Sql"></include>
+  	</where>
+  </select>
+  
+  <!-- 批量删除线路信息 -->
+  <delete id="deleteRouteByIds" parameterType="java.lang.String">
+  	delete from route r
+  	<where>
+  		r.id in
+      <foreach collection="array" item="id" separator="," open="(" close=")">
+        #{id}
+      </foreach>
+  	</where>
+  </delete>
+  
+</mapper>

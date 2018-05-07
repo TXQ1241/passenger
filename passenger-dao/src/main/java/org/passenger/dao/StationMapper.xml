@@ -14,7 +14,7 @@
   <!-- 获取车站脚本 -->
   <sql id="Get_Station_Sql">
   	<if test="code != null and code != ''">
-  		and s.code = #{code}
+        and s.code like '%${code}%'
   	</if>
   </sql>
   <!-- 保存车站信息 -->
