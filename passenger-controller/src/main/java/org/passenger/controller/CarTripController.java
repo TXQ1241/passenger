@@ -36,7 +36,7 @@ public class CarTripController {
             carTripVo.setPageNum((pageNum-1)*carTripVo.getPageSize());
         }
         try {
-            List<CarTrip> carTripList = carTripService.getCarTrips(carTripVo);
+            List<CarTripVo> carTripList = carTripService.getCarTripVos(carTripVo);
             dataVo.setDatalist(carTripList);
             dataVo.setCode(Constants.DataCode.SUCCESS);
             dataVo.setMsg("数据获取成功");

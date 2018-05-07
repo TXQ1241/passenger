@@ -43,4 +43,11 @@ public interface ITicketService {
      * @param ticketIds
      */
     void deleteTicketByIds(String[] ticketIds);
+    
+    /**
+     * 通过id获取票信息
+     * @param ticketId
+     * @return
+     */
+	Ticket getTicketById(String ticketId);
 }

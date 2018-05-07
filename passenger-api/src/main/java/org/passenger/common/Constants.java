@@ -44,5 +44,29 @@ public class Constants {
         String CARTRIP = "3"; //车次管理
         
     }
+    
+    /**
+     * 线路常量
+     * @author Administrator
+     *
+     */
+    public interface RouteConstants {
+    	/**
+    	 * 路线中涉及的参数
+    	 */
+    	String CAR_TRIP_ID = "carTripId";
+    }
+    
+    /**
+     * 票数常量
+     * @author Administrator
+     *
+     */
+    public interface TicketConstants {
+    	/**
+    	 * 线路id
+    	 */
+    	String ROUTE_ID = "routeId";
+    }
 	
 }

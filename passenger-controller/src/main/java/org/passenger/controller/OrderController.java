@@ -9,6 +9,7 @@ import org.passenger.vo.OrderVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -41,7 +42,7 @@ public class OrderController {
 			orderVo.setPageNum((pageNum-1)*orderVo.getPageSize());
 		}
 		try {
-			List<Orders> orderList = orderService.getOrders(orderVo);
+			List<OrderVo> orderList = orderService.getOrderVos(orderVo);
 			dataVo.setDatalist(orderList);
 			dataVo.setCode(Constants.DataCode.SUCCESS);
 			dataVo.setMsg("数据获取成功");
@@ -60,7 +61,7 @@ public class OrderController {
 
 	@RequestMapping("save")
 	@ResponseBody
-	public Map<String, String> saveOrder(Orders orders) {
+	public Map<String, String> saveOrder(@RequestBody Orders orders) {
 		Map<String, String> msgMap = new HashMap<String, String>();
 		try {
 			orderService.save(orders);

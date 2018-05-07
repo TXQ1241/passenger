@@ -66,9 +66,9 @@
   
   <!-- 批量删除到达站信息 -->
   <delete id="deleteArriveStationByIds" parameterType="java.lang.String">
-  	delete from arrive_station as
+  	delete from arrive_station 
   	<where>
-      as.id in
+      id in
       <foreach collection="array" item="id" separator="," open="(" close=")">
         #{id}
       </foreach>

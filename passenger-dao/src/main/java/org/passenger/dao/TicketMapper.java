@@ -17,4 +17,6 @@ public interface TicketMapper {
     int update(Ticket ticket);
     
     void deleteTicketByIds(String[] ids);
+
+	Ticket getTicketById(String ticketId);
 }

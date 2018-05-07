@@ -8,6 +8,8 @@ public class Ticket {
     private String routeId;
 
     private Date ticketDate;
+    
+    private Integer number;
 
     public String getId() {
         return id;
@@ -33,4 +35,12 @@ public class Ticket {
         this.ticketDate = ticketDate;
     }
 
+	public Integer getNumber() {
+		return number;
+	}
+
+	public void setNumber(Integer number) {
+		this.number = number;
+	}
+    
 }

@@ -3,28 +3,28 @@
 <mapper namespace="org.passenger.dao.TicketMapper" >
   <resultMap id="BaseResultMap" type="org.passenger.pojo.Ticket" >
     <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="pass_station_id" property="passStationId" jdbcType="VARCHAR" />
+    <result column="route_id" property="routeId" jdbcType="VARCHAR" />
     <result column="ticket_date" property="ticketDate" jdbcType="DATE" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, pass_station_id, ticket_date
+    id, route_id, ticket_date
   </sql>
   <!-- 获取车票脚本 -->
   <sql id="Get_Ticket_Sql">
-  	<if test="passStationId != null and passStationId != ''">
-  		and t.pass_station_id = #{passStationId}
+  	<if test="routeId != null and routeId != ''">
+  		and t.route_id = #{routeId}
   	</if>
   </sql>
   <!-- 新增车票数 -->
   <insert id="insert" parameterType="org.passenger.pojo.Ticket" >
-    insert into ticket (id, pass_station_id, ticket_date, 
+    insert into ticket (id, route_id, ticket_date, 
       number)
-    values (#{id,jdbcType=VARCHAR}, #{passStationId,jdbcType=VARCHAR}, #{ticketDate,jdbcType=DATE})
+    values (#{id,jdbcType=VARCHAR}, #{routeId,jdbcType=VARCHAR}, #{ticketDate,jdbcType=DATE})
   </insert>
   <!-- 更新车票数 -->
   <update id="update" parameterType="org.passenger.pojo.Ticket" >
     update ticket
-    set pass_station_id = #{passStationId,jdbcType=VARCHAR},
+    set route_id = #{routeId,jdbcType=VARCHAR},
       ticket_date = #{ticketDate,jdbcType=DATE}
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -39,6 +39,11 @@
   		limit #{pageNum},#{pageSize}
   	</if>
   </select>
+  
+  <select id="getTicketById" resultMap = "BaseResultMap" parameter="java.lang.String">
+  	select * from ticket t where t.id = #{id}
+  </select>
+  
     <!-- 获取车票记录数 -->
   <select id="getTicketCount" resultType="java.lang.Integer" parameterType="org.passenger.vo.TicketVo">
   	select count(*) from ticket t
@@ -49,9 +54,9 @@
   
   <!-- 批量删除票数 -->
   <delete id="deleteTicketByIds">
-  	delete from ticket t
+  	delete from ticket
   	<where>
-      t.id in
+      id in
       <foreach collection="array" item="id" separator="," open="(" close=")">
         #{id}
       </foreach>

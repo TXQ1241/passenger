@@ -79,9 +79,9 @@
   
   <!-- 批量删除用户信息 -->
   <delete id="deleteUserByIds" parameterType="java.lang.String">
-    delete from user u
+    delete from user
     <where>
-      u.id in
+      id in
       <foreach collection="array" item="id" separator="," open="(" close=")">
         #{id}
       </foreach>

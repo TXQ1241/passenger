@@ -28,4 +28,11 @@ public interface IOrderService {
     void save(Orders orders);
 
     void update(Orders orders);
+    
+    /**
+     * 获取订单封装信息
+     * @param orderVo
+     * @return
+     */
+	List<OrderVo> getOrderVos(OrderVo orderVo);
 }

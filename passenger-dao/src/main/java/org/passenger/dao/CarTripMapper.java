@@ -17,4 +17,6 @@ public interface CarTripMapper {
     int getCarTripCount(CarTripVo carTripVo);
     
     void deleteCarTripByIds(String[] ids);
+
+	CarTrip getCarTripById(String carTripId);
 }

@@ -18,4 +18,6 @@ public interface StationMapper {
     int getStationCount(StationVo stationVo);
     
     void deleteStationByIds(String[] ids);
+
+	Station getStationById(String id);
 }

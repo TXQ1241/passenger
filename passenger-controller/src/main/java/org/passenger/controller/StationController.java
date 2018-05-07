@@ -2,7 +2,6 @@ package org.passenger.controller;
 
 import org.passenger.common.Constants;
 import org.passenger.pojo.Station;
-import org.passenger.pojo.User;
 import org.passenger.service.IStationService;
 import org.passenger.utils.StringUtils;
 import org.passenger.vo.DataVo;
@@ -55,7 +54,7 @@ public class StationController {
 
 	@RequestMapping("save")
 	@ResponseBody
-	public Map<String, String> saveStation(Station station){
+	public Map<String, String> saveStation(@RequestBody Station station){
 		Map<String, String> msgMap = new HashMap<String, String>();
 		try {
 			if (StringUtils.isNotBlank(station.getId())) {

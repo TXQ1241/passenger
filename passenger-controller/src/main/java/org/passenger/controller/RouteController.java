@@ -1,5 +1,11 @@
 package org.passenger.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.passenger.common.Constants;
 import org.passenger.pojo.Route;
 import org.passenger.service.IRouteService;
@@ -13,10 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 @Controller
 @RequestMapping("/route/")
 public class RouteController {
@@ -24,6 +26,19 @@ public class RouteController {
     @Autowired
     @Qualifier("routeService")
     IRouteService routeService;
+    
+    @RequestMapping("setCarTripId")
+    public String setCarTripId(HttpServletRequest request,String carTripId) {
+    	request.setAttribute(Constants.RouteConstants.CAR_TRIP_ID,carTripId);
+    	return "arriveStation";
+    }
+    
+    @RequestMapping("getCarTripId")
+    @ResponseBody
+    public String getCarTripId(HttpServletRequest request) {
+    	return (String) request.getSession().getAttribute(Constants.RouteConstants.CAR_TRIP_ID);
+    }
+    
     /**
      * 获取线路信息（分页）
      * @param routeVo

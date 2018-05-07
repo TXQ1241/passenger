@@ -1,7 +1,6 @@
 package org.passenger.service;
 
 import org.passenger.pojo.Station;
-import org.passenger.pojo.User;
 import org.passenger.vo.StationVo;
 
 import java.util.List;
@@ -44,4 +43,12 @@ public interface IStationService {
      * @param stationIds
      */
     void deleteStationByIds(String[] stationIds);
+    
+    /**
+     * 通过id获取车站信息
+     * @param arriveStation
+     * @return
+     */
+	Station getStationById(String id);
+   
 }
