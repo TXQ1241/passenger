@@ -45,7 +45,9 @@
   	<where>
   		<include refid="Get_CarTrip_Sql"></include>
   	</where>
-  	limit #{pageNum},#{pageSize}
+  	<if test="pageNum != null and pageSize != null">
+  	  	limit #{pageNum},#{pageSize}
+  	</if>
   </select>
   
     <!-- 获取车次记录数 -->
