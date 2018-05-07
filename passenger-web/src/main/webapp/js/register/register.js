@@ -64,7 +64,7 @@ $('#register').registerPanel({
             data.userType = '1';
             data.userBalance = parseFloat(data.userBalance).toFixed(2);
             ServerUtil.api('user/', 'save', data, function (data) {
-                window.location.href = window.location.origin + '/passenger-web/login.html';
+                window.location.href = window.location.origin + '/' + pageConfig + 'login.html';
             });
         }
     }
