@@ -56,7 +56,7 @@
   </select>
   
   <!-- 获取订单记录数 -->
-  <select id="getOrderCount" resultType="org.passenger.vo.OrderVo">
+  <select id="getOrderCount" resultType="java.lang.Integer" parameterType="org.passenger.vo.OrderVo">
   	select count(*) from orders o
   	<where>
   		<include refid="Get_Orders_Sql"></include>
