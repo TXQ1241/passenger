@@ -289,7 +289,7 @@ layui.use(['table'], function () {
             min: 0,
             max: 30,
             value: new Date(),
-            btns: ['now'],
+            btns: ['confirm', 'now'],
             type: 'time'
         });
         laydate.render({
@@ -297,7 +297,7 @@ layui.use(['table'], function () {
             min: 0,
             max: 30,
             value: new Date(),
-            btns: ['now'],
+            btns: ['confirm', 'now'],
             type: 'time'
         });
         layer.open({
