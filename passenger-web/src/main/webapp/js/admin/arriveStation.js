@@ -6,7 +6,6 @@ layui.use(['table'], function () {
     var laytpl = layui.laytpl;
     var element = layui.element;
     var tableTitle = {
-        carTripCode: '车次',
         startStation: '始发站',
         arriveStation: '终点站',
         startTime: '始发时间',
