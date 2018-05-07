@@ -62,7 +62,7 @@ layui.use(['table'], function () {
 
     //获取线路id
     var routeId;
-    ServerUtil.api('ticket', 'getRouteId', {}, function (result) {
+    ServerUtil.api('ticket/', 'getRouteId', {}, function (result) {
         routeId = result;
     });
     //第一个实例
