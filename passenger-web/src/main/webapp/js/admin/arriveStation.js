@@ -262,14 +262,6 @@ layui.use(['table'], function () {
         }
     });
 
-    //按条件搜索
-    $('#searchBtn').on('click', function () {
-        // var type = $(this).data('type');
-        var obj = {};
-        var code = $('#codeReload').val();
-        obj.code = code;
-        tableReload(obj);
-    });
     //批量删除
     $('#deleteUsers').on('click', function () {
         var checkStatus = table.checkStatus('poemUsers'); //获取复选框信息
