@@ -61,6 +61,7 @@ public class CarTripController {
                carTripService.saveCarTrip(carTripVo);
             msgMap.put(Constants.AjaxStatus.AJAX_SUCCESS,"保存车次信息成功");
         } catch (Exception e) {
+        	e.printStackTrace();
             msgMap.put(Constants.AjaxStatus.AJAX_FAIL,"保存车次信息失败");
         }
         return msgMap;
