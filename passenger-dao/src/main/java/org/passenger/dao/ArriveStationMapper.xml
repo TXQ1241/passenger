@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.passenger.dao.ArriveStationMapper" >
+  <resultMap id="BaseResultMap" type="org.passenger.pojo.ArriveStation" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="station_id" property="stationId" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="arrive_time" property="arriveTime" jdbcType="TIMESTAMP" />
+    <result column="car_trip_code" property="carTripCode" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="fare_code" property="fareCode" jdbcType="VARCHAR" />
+    <result column="station_name" property="stationName" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, station_id, start_time, arrive_time, car_trip_code, sort, fare_code, station_name
+  </sql>
+  
+  <!-- 获取到达站脚本 -->
+  <sql id="Get_Arrive_Sql">
+  	<if test="carTripCode != null and carTripCode != ''">
+  		and as.car_trip_code = #{carTripCode}
+  	</if>
+  	<if test="stationName != null and stationName !=''">
+  		and as.station_name like '%${stationName}%'
+  	</if>
+  </sql>
+ 
+ <!-- 保存到达站信息 -->
+  <insert id="insert" parameterType="org.passenger.pojo.ArriveStation" >
+    insert into arrive_station (id, station_id, start_time, 
+      arrive_time, car_trip_code, sort, 
+      fare_code, station_name)
+    values (#{id,jdbcType=VARCHAR}, #{stationId,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{arriveTime,jdbcType=TIMESTAMP}, #{carTripCode,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
+      #{fareCode,jdbcType=VARCHAR}, #{stationName,jdbcType=VARCHAR})
+  </insert>
+  
+  <!-- 更新到达站信息 -->
+  <update id="update" parameterType="org.passenger.pojo.ArriveStation" >
+    update arrive_station
+    set station_id = #{stationId,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      arrive_time = #{arriveTime,jdbcType=TIMESTAMP},
+      car_trip_code = #{carTripCode,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      fare_code = #{fareCode,jdbcType=VARCHAR},
+      station_name = #{stationName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- 获取到达站信息 -->
+  <select id="getArriveStationList" resultMap="BaseResultMap" parameterType="org.passenger.vo.ArriveVo">
+  	select * from arrive_station as
+  	<where>
+  		<include refid="Get_Arrive_Sql"></include>
+  	</where>
+  	limit #{pageNum},#{pageSize}
+  </select>
+  
+  <!-- 获取到达站记录数 -->
+  <select id="getArriveStationCount" resultType="java.lang.Integer" parameterType="org.passenger.vo.ArriveVo">
+  	select count(*) from arrive_station as
+  	<include refid="Get_Arrive_Sql"></include>
+  </select>
+  
+  <!-- 批量删除到达站信息 -->
+  <delete id="deleteArriveStationByIds" parameterType="java.lang.String">
+  	delete from arrive_station as
+  	<where>
+      as.id in
+      <foreach collection="array" item="id" separator="," open="(" close=")">
+        #{id}
+      </foreach>
+    </where>
+  </delete>
+  
+</mapper>

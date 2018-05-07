@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.passenger.dao.CarTripMapper" >
+  <resultMap id="BaseResultMap" type="org.passenger.pojo.CarTrip" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="start_station" property="startStation" jdbcType="VARCHAR" />
+    <result column="arrive_station" property="arriveStation" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="arrive_time" property="arriveTime" jdbcType="TIMESTAMP" />
+    <result column="fare" property="fare" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, code, start_station, arrive_station, start_time, arrive_time, fare
+  </sql>
+  <!-- 获取车次信息脚本 -->
+  <sql id="Get_CarTrip_Sql">
+  	<if test="code != null and code != ''">
+  		and ct.code like '%${code}%'
+  	</if>
+  </sql>
+  <!-- 保存车次信息 -->
+  <insert id="insert" parameterType="org.passenger.pojo.CarTrip" >
+    insert into car_trip (id, code, start_station, 
+      arrive_station, start_time, arrive_time, 
+      fare)
+    values (#{id,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{startStation,jdbcType=VARCHAR}, 
+      #{arriveStation,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{arriveTime,jdbcType=TIMESTAMP}, 
+      #{fare,jdbcType=DOUBLE})
+  </insert>
+  <!-- 更新车次信息 -->
+  <update id="update" parameterType="org.passenger.pojo.CarTrip" >
+    update car_trip
+    set code = #{code,jdbcType=VARCHAR},
+      start_station = #{startStation,jdbcType=VARCHAR},
+      arrive_station = #{arriveStation,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      arrive_time = #{arriveTime,jdbcType=TIMESTAMP},
+      fare = #{fare,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <!-- 获取车次信息 -->
+  <select id="getCarTripList" resultMap = "BaseResultMap" parameterType="org.passenger.vo.CarTripVo">
+  	select * from car_trip ct
+  	<where>
+  		<include refid="Get_CarTrip_Sql"></include>
+  	</where>
+  	limit #{pageNum},#{pageSize}
+  </select>
+  
+    <!-- 获取车次记录数 -->
+  <select id="getCarTripCount" resultType="java.lang.Integer" parameterType="org.passenger.vo.CarTripVo">
+  	select count(*) from car_trip ct
+  	<where>
+  		<include refid="Get_CarTrip_Sql"></include>
+  	</where>
+  </select>
+  
+  <!-- 批量删除车次信息 -->
+  <delete id="deleteCarTripByIds" parameterType="java.lang.String">
+  	delete from car_trip ct
+  	<where>
+      ct.id in
+      <foreach collection="array" item="id" separator="," open="(" close=")">
+        #{id}
+      </foreach>
+    </where>
+  </delete>
+  
+</mapper>

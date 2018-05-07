@@ -15,8 +15,6 @@ public class CarTrip {
 
     private Date arriveTime;
 
-    private Double fare;
-
     public String getId() {
         return id;
     }
@@ -63,13 +61,5 @@ public class CarTrip {
 
     public void setArriveTime(Date arriveTime) {
         this.arriveTime = arriveTime;
-    }
-
-    public Double getFare() {
-        return fare;
-    }
-
-    public void setFare(Double fare) {
-        this.fare = fare;
     }
 }
