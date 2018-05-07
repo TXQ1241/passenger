@@ -21,8 +21,7 @@
   <!-- 保存车次信息 -->
   <insert id="insert" parameterType="org.passenger.pojo.CarTrip" >
     insert into car_trip (id, code, start_station, 
-      arrive_station, start_time, arrive_time, 
-      fare)
+      arrive_station, start_time, arrive_time)
     values (#{id,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{startStation,jdbcType=VARCHAR}, 
       #{arriveStation,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{arriveTime,jdbcType=TIMESTAMP})
   </insert>
