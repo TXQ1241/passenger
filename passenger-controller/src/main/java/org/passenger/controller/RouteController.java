@@ -7,7 +7,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.passenger.common.Constants;
-import org.passenger.pojo.Route;
 import org.passenger.service.IRouteService;
 import org.passenger.utils.StringUtils;
 import org.passenger.vo.DataVo;
@@ -83,10 +82,10 @@ public class RouteController {
      */
     @RequestMapping("save")
     @ResponseBody
-    public Map<String, String> saveRoute(@RequestBody Route route){
+    public Map<String, String> saveRoute(@RequestBody RouteVo routeVo){
         Map<String, String> msgMap = new HashMap<String, String>();
         try {
-            routeService.saveRoute(route);
+            routeService.saveRoute(routeVo);
             msgMap.put(Constants.AjaxStatus.AJAX_SUCCESS,"保存票数信息成功");
         } catch (Exception e) {
             msgMap.put(Constants.AjaxStatus.AJAX_FAIL,"保存票数信息失败");

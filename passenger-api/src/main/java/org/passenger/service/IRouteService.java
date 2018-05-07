@@ -47,7 +47,7 @@ public interface IRouteService {
     
     /**
      * 保存路径信息
-     * @param route
+     * @param routeVo
      */
-	void saveRoute(Route route);
+	void saveRoute(RouteVo routeVo);
 }

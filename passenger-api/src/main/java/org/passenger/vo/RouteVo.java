@@ -14,7 +14,9 @@ public class RouteVo extends PageVo {
     private String arriveStationId;//到达站id
     private String arriveStationName;//到达站名称
     private Date startTime;//始发时间
+    private String startTimeStr;
     private Date arriveTime;//到达时间
+    private String arriveTimeStr;//
     private Integer ticketNum;//票数
     private Double price;//票价
     private String carTripCode;//车次编码
@@ -128,4 +130,21 @@ public class RouteVo extends PageVo {
     public void setDate(Date date) {
         this.date = date;
     }
+
+	public String getStartTimeStr() {
+		return startTimeStr;
+	}
+
+	public void setStartTimeStr(String startTimeStr) {
+		this.startTimeStr = startTimeStr;
+	}
+
+	public String getArriveTimeStr() {
+		return arriveTimeStr;
+	}
+
+	public void setArriveTimeStr(String arriveTimeStr) {
+		this.arriveTimeStr = arriveTimeStr;
+	}
+    
 }
