@@ -55,7 +55,7 @@ public class CarTripController {
 
     @RequestMapping("save")
     @ResponseBody
-    public Map<String, String> saveCarTrip(@RequestBody CarTripVo carTripVo){
+    public Map<String, String> saveCarTrip(CarTripVo carTripVo){
         Map<String, String> msgMap = new HashMap<String, String>();
         try {
                carTripService.saveCarTrip(carTripVo);
