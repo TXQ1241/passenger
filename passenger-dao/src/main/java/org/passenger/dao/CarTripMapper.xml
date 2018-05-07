@@ -8,7 +8,6 @@
     <result column="arrive_station" property="arriveStation" jdbcType="VARCHAR" />
     <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
     <result column="arrive_time" property="arriveTime" jdbcType="TIMESTAMP" />
-    <result column="fare" property="fare" jdbcType="DOUBLE" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, code, start_station, arrive_station, start_time, arrive_time, fare
@@ -25,8 +24,7 @@
       arrive_station, start_time, arrive_time, 
       fare)
     values (#{id,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{startStation,jdbcType=VARCHAR}, 
-      #{arriveStation,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{arriveTime,jdbcType=TIMESTAMP}, 
-      #{fare,jdbcType=DOUBLE})
+      #{arriveStation,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{arriveTime,jdbcType=TIMESTAMP})
   </insert>
   <!-- 更新车次信息 -->
   <update id="update" parameterType="org.passenger.pojo.CarTrip" >
@@ -35,8 +33,7 @@
       start_station = #{startStation,jdbcType=VARCHAR},
       arrive_station = #{arriveStation,jdbcType=VARCHAR},
       start_time = #{startTime,jdbcType=TIMESTAMP},
-      arrive_time = #{arriveTime,jdbcType=TIMESTAMP},
-      fare = #{fare,jdbcType=DOUBLE}
+      arrive_time = #{arriveTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
   <!-- 获取车次信息 -->

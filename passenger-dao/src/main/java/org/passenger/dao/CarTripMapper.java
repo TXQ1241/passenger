@@ -1,7 +1,6 @@
 package org.passenger.dao;
 
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 import org.passenger.pojo.CarTrip;
 import org.passenger.vo.CarTripVo;
 import org.springframework.stereotype.Repository;
@@ -13,7 +12,7 @@ public interface CarTripMapper {
 
     int update(CarTrip carTrip);
     
-    List<CarTrip> getCarTrips(CarTripVo carTripVo);
+    List<CarTrip> getCarTripList(CarTripVo carTripVo);
     
     int getCarTripCount(CarTripVo carTripVo);
     
