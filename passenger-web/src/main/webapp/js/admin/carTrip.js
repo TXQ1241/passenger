@@ -5,10 +5,11 @@ layui.use(['table'], function () {
     $ = layui.$;
     var laytpl = layui.laytpl;
     var element = layui.element;
+    var laydate = layui.laydate;
     var tableTitle = {
         code: '车次',
-        startStation: '始发站',
-        arriveStation: '终点站',
+        startStationName: '始发站',
+        arriveStationName: '终点站',
         startTime: '始发时间',
         arriveTime: '到达时间'
     };
@@ -94,11 +95,11 @@ layui.use(['table'], function () {
                     title: '车次',
                     // width: 150
                 }, {
-                    field: 'startStation',
+                    field: 'startStationName',
                     title: '始发站',
                     width: 80
                 }, {
-                    field: 'arriveStation',
+                    field: 'arriveStationName',
                     title: '终点站',
                     // width: 150
                 }, {
@@ -281,6 +282,23 @@ layui.use(['table'], function () {
             var citySelect2 = new Vcity.CitySelector({
                 input: 'arriveStation'
             });
+        });
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#startTime', //指定元素
+            min: 0,
+            max: 30,
+            value: new Date(),
+            btns: ['now'],
+            type: 'time'
+        });
+        laydate.render({
+            elem: '#arriveTime', //指定元素
+            min: 0,
+            max: 30,
+            value: new Date(),
+            btns: ['now'],
+            type: 'time'
         });
         layer.open({
             title: '新增',
