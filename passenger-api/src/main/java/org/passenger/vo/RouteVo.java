@@ -7,7 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 
 public class RouteVo extends PageVo {
-
+	private String id;
     private String ids;
     private String startStationId;//始发站id
     private String startStationName;//始发站名称
@@ -32,8 +32,16 @@ public class RouteVo extends PageVo {
             e.printStackTrace();
         }
     }
+    
+    public String getId() {
+		return id;
+	}
 
-    public String getIds() {
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getIds() {
         return ids;
     }
 
