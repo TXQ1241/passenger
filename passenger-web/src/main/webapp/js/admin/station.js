@@ -146,7 +146,7 @@ layui.use(['table'], function () {
                 view.innerHTML = html;
             });
             layer.open({
-                title: '用户详情',
+                title: '车站详情',
                 type: 1,
                 skin: 'layui-layer-molv',
                 shadeClose: true,
