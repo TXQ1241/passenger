@@ -1,6 +1,8 @@
 package org.passenger.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.passenger.dao.CarTripMapper;
@@ -51,13 +53,27 @@ public class CarTripServiceImpl implements ICarTripService {
 		if(carTripList != null && carTripList.size() > 0) {
 			for (CarTrip carTrip:carTripList) {
 				CarTripVo vo = new CarTripVo(carTrip);
-				if(StringUtils.isNotBlank(vo.getArriveStation())) {
-					Station station = stationService.getStationById(vo.getArriveStation());
+				//设置车站名
+				if(StringUtils.isNotBlank(vo.getStartStation())) {
+					Station station = stationService.getStationById(vo.getStartStation());
 					vo.setStartStationName(station.getName());
 				}
-				if(StringUtils.isNotBlank(vo.getStartStation())) {
+				if(StringUtils.isNotBlank(vo.getArriveStation())) {
 					Station station = stationService.getStationById(vo.getArriveStation());
 					vo.setArriveStationName(station.getName());
+				}
+				//设置时间
+				if(carTrip.getStartTime() != null) {
+					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					String startTimeStr = df.format(carTrip.getStartTime());
+					String [] times = startTimeStr.split(" ");
+					vo.setStartTimeStr(times[1]);
+				}
+				if(carTrip.getArriveTime() != null) {
+					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					String startTimeStr = df.format(carTrip.getArriveTime());
+					String [] times = startTimeStr.split(" ");
+					vo.setArriveTimeStr(times[1]);
 				}
 				voList.add(vo);
 			}
@@ -70,27 +86,42 @@ public class CarTripServiceImpl implements ICarTripService {
 	}
 
 	public void saveCarTrip(CarTripVo carTripVo) {
-		//车次中设置车站名称
-		if(StringUtils.isNotBlank(carTripVo.getStartStationName())) {
-			List<Station> stationList = stationService.getStationByName(carTripVo.getStartStationName());
-			if(stationList != null && stationList.size() > 0) {
-				Station startStation = stationList.get(0);
-				carTripVo.setStartStation(startStation.getId());
+		try {
+			//车次中设置车站名称
+			if(StringUtils.isNotBlank(carTripVo.getStartStationName())) {
+				List<Station> stationList = stationService.getStationByName(carTripVo.getStartStationName());
+				if(stationList != null && stationList.size() > 0) {
+					Station startStation = stationList.get(0);
+					carTripVo.setStartStation(startStation.getId());
+				}
 			}
-		}
-		if(StringUtils.isNotBlank(carTripVo.getArriveStationName())) {
-			List<Station> stationList = stationService.getStationByName(carTripVo.getArriveStationName());
-			if(stationList != null && stationList.size() > 0) {
-				Station arriveStation = stationList.get(0);
-				carTripVo.setArriveStation(arriveStation.getId());
+			if(StringUtils.isNotBlank(carTripVo.getArriveStationName())) {
+				List<Station> stationList = stationService.getStationByName(carTripVo.getArriveStationName());
+				if(stationList != null && stationList.size() > 0) {
+					Station arriveStation = stationList.get(0);
+					carTripVo.setArriveStation(arriveStation.getId());
+				}
 			}
-		}
-		CarTrip carTrip = new CarTrip(carTripVo);
-		if(StringUtils.isNotBlank(carTrip.getId())) {
-			this.update(carTrip);
-		} else {
-			carTrip.setId(StringUtils.getUUID());
-			this.save(carTrip);
+			//转换时间格式
+			if(StringUtils.isNotBlank(carTripVo.getStartTimeStr())) {
+		        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("HH:mm:ss");
+		        Date date=simpleDateFormat.parse(carTripVo.getStartTimeStr());
+		        carTripVo.setStartTime(date);
+			}
+			if(StringUtils.isNotBlank(carTripVo.getArriveTimeStr())) {
+		        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("HH:mm:ss");
+		        Date date=simpleDateFormat.parse(carTripVo.getArriveTimeStr());
+		        carTripVo.setArriveTime(date);
+			}
+			CarTrip carTrip = new CarTrip(carTripVo);
+			if(StringUtils.isNotBlank(carTrip.getId())) {
+				this.update(carTrip);
+			} else {
+				carTrip.setId(StringUtils.getUUID());
+				this.save(carTrip);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 }
