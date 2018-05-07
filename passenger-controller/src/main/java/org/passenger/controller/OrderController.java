@@ -58,6 +58,19 @@ public class OrderController {
 		return dataVo;
 	}
 
+	@RequestMapping("save")
+	@ResponseBody
+	public Map<String, String> saveOrder(Orders orders) {
+		Map<String, String> msgMap = new HashMap<String, String>();
+		try {
+			orderService.save(orders);
+			msgMap.put(Constants.AjaxStatus.AJAX_SUCCESS,"删除订单信息成功");
+		} catch (Exception e) {
+			msgMap.put(Constants.AjaxStatus.AJAX_FAIL,"删除订单信息失败");
+		}
+		return msgMap;
+	}
+
 	/**
 	 * 改签订单信息
 	 * @param order
@@ -68,9 +81,10 @@ public class OrderController {
 	public Map<String, String> changeOrder(Orders order) {
 		Map<String, String> msgMap = new HashMap<String, String>();
 		try {
-			msgMap.put(Constants.AjaxStatus.AJAX_SUCCESS,"删除订单信息成功");
+
+			msgMap.put(Constants.AjaxStatus.AJAX_SUCCESS,"改签成功");
 		} catch (Exception e) {
-			msgMap.put(Constants.AjaxStatus.AJAX_FAIL,"删除订单信息失败");
+			msgMap.put(Constants.AjaxStatus.AJAX_FAIL,"改签失败");
 		}
 		return msgMap;
 	}

@@ -18,7 +18,7 @@ public interface IStationService {
      * @param stationVo
      * @return
      */
-    List<User> getStations(StationVo stationVo);
+    List<Station> getStations(StationVo stationVo);
 
     /**
      * 获取车站记录数

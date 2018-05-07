@@ -36,7 +36,7 @@ public class StationController {
 			stationVo.setPageNum((pageNum-1)*stationVo.getPageSize());
 		}
 		try {
-			List<User> userList = stationService.getStations(stationVo);
+			List<Station> userList = stationService.getStations(stationVo);
 			dataVo.setDatalist(userList);
 			dataVo.setCode(Constants.DataCode.SUCCESS);
 			dataVo.setMsg("数据获取成功");
