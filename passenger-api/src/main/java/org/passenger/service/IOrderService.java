@@ -24,4 +24,8 @@ public interface IOrderService {
      * @return
      */
     Integer getOrderCount(OrderVo orderVo);
+
+    void save(Orders orders);
+
+    void update(Orders orders);
 }

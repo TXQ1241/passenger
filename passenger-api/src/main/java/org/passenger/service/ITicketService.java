@@ -25,4 +25,22 @@ public interface ITicketService {
      * @return
      */
     Integer getTicketCount(TicketVo ticketVo);
+
+    /**
+     * 保存票数信息
+     * @param ticket
+     */
+    void save(Ticket ticket);
+
+    /**
+     * 更新票数信息
+     * @param ticket
+     */
+    void update(Ticket ticket);
+
+    /**
+     * 批量删除票数信息
+     * @param ticketIds
+     */
+    void deleteTicketByIds(String[] ticketIds);
 }

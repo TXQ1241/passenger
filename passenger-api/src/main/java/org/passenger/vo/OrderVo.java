@@ -5,7 +5,7 @@ public class OrderVo extends PageVo {
     private String userId;
     private String fare;//票价
     private String startStation;//始发站
-    private String endStation;//到达站
+    private String arriveStation;//到达站
     private String startTime;//出发时间
     private String endTime;//到达时间
 
@@ -33,12 +33,12 @@ public class OrderVo extends PageVo {
         this.startStation = startStation;
     }
 
-    public String getEndStation() {
-        return endStation;
+    public String getArriveStation() {
+        return arriveStation;
     }
 
-    public void setEndStation(String endStation) {
-        this.endStation = endStation;
+    public void setArriveStation(String arriveStation) {
+        this.arriveStation = arriveStation;
     }
 
     public String getStartTime() {
