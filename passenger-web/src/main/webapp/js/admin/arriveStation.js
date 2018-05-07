@@ -242,7 +242,7 @@ layui.use(['table'], function () {
                 content: $('#tableBox')
             });
         } else if (obj.event === 'toTicket') {
-            window.location.href = window.location.origin + 'ticket/setRouteId?routeId=' + data.id;
+            window.location.href = window.location.origin + '/passenger-webticket/setRouteId?routeId=' + data.id;
         }
     });
 

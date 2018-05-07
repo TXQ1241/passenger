@@ -246,7 +246,7 @@ layui.use(['table'], function () {
                 content: $('#tableBox')
             });
         } else if (obj.event === 'toArrive') {
-            window.location.href = window.location.origin + '/route/setCarTripId?carTripId=' + data.id;
+            window.location.href = window.location.origin + '/passenger-web/route/setCarTripId?carTripId=' + data.id;
         }
     });
 
