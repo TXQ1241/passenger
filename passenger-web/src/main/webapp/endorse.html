@@ -275,7 +275,13 @@
                 if (!isLogin) {
                     window.location.href = window.location.origin + '/' + pageConfig + 'login.html';
                 } else {
+                    ServerUtil.api('', '', {
 
+                    }, function (result) {
+                        layer.msg(result.msg, {
+                            time: 1000
+                        });
+                    });
                 }
             }
         });
