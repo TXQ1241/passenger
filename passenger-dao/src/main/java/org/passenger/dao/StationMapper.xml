@@ -45,8 +45,8 @@
   </select>
   
   <!-- 获取信息记录数 -->
-  <select id="getStationCount">
-  	select count(*) from s
+  <select id="getStationCount" resultType="java.lang.Integer" parameterType="org.passenger.vo.StationVo">
+  	select count(*) from station s
   	<where>
   		<include refid="Get_Station_Sql"></include>
   	</where>
