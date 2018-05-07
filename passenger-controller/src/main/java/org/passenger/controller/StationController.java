@@ -36,11 +36,11 @@ public class StationController {
 			stationVo.setPageNum((pageNum-1)*stationVo.getPageSize());
 		}
 		try {
-			List<Station> userList = stationService.getStations(stationVo);
-			dataVo.setDatalist(userList);
+			List<Station> stationList = stationService.getStations(stationVo);
+			dataVo.setDatalist(stationList);
 			dataVo.setCode(Constants.DataCode.SUCCESS);
 			dataVo.setMsg("数据获取成功");
-			if (userList != null) {
+			if (stationList != null) {
 				dataVo.setCount(stationService.getStationCount(stationVo));
 			} else {
 				dataVo.setCount(Constants.ZERO_NUM);

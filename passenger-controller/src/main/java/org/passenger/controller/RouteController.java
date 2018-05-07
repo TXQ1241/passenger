@@ -39,11 +39,11 @@ public class RouteController {
             routeVo.setPageNum((pageNum-1)*routeVo.getPageSize());
         }
         try {
-            List<Route> userList = routeService.getRouteList(routeVo);
-            dataVo.setDatalist(userList);
+            List<Route> routeList = routeService.getRouteList(routeVo);
+            dataVo.setDatalist(routeList);
             dataVo.setCode(Constants.DataCode.SUCCESS);
             dataVo.setMsg("数据获取成功");
-            if (userList != null) {
+            if (routeList != null) {
                 dataVo.setCount(routeService.getRouteCount(routeVo));
             } else {
                 dataVo.setCount(Constants.ZERO_NUM);

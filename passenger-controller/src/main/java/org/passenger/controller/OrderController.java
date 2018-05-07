@@ -41,11 +41,11 @@ public class OrderController {
 			orderVo.setPageNum((pageNum-1)*orderVo.getPageSize());
 		}
 		try {
-			List<Orders> userList = orderService.getOrders(orderVo);
-			dataVo.setDatalist(userList);
+			List<Orders> orderList = orderService.getOrders(orderVo);
+			dataVo.setDatalist(orderList);
 			dataVo.setCode(Constants.DataCode.SUCCESS);
 			dataVo.setMsg("数据获取成功");
-			if (userList != null) {
+			if (orderList != null) {
 				dataVo.setCount(orderService.getOrderCount(orderVo));
 			} else {
 				dataVo.setCount(Constants.ZERO_NUM);
