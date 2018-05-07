@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="../iconfont/iconfont.css">
     <link rel="stylesheet" href="../libs/layui/css/layui.css">
     <link rel="stylesheet" href="../css/admin.css">
-    <link rel="stylesheet" href="./css/cityselect.css">
 </head>
 
 <body class="layui-layout-body">
@@ -40,7 +39,7 @@
                     <li class="layui-nav-item">
                         <a class="" href="javascript:;" id="station">车站管理</a>
                     </li>
-                    <li class="layui-nav-item layui-nav-itemed">
+                    <li class="layui-nav-item">
                         <a class="" href="javascript:;" id="carTrip">车次管理</a>
                     </li>
                 </ul>
@@ -51,11 +50,6 @@
             <!-- 内容主体区域 -->
             <!-- <div style="padding: 15px;">内容主体区域</div> -->
             <div class="demoTable layui-clear">
-                车次：
-                <div class="layui-inline">
-                    <input class="layui-input" name="account" id="codeReload" autocomplete="off">
-                </div>
-                <button class="layui-btn" data-type="reload" id="searchBtn">搜索</button>
                 <button class="layui-btn layui-btn-danger" id="deleteUsers">批量删除</button>
                 <button class="layui-btn" id="addUser">新增</button>
             </div>
@@ -69,7 +63,6 @@
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-    <a class="layui-btn layui-btn-xs" lay-event="toArrive">查看线路</a>
 </script>
 
 <!-- 详情面板 -->
@@ -99,7 +92,6 @@
 </script>
 <script src="../libs/layui/layui.all.js"></script>
 <script src="../js/ServerUtil.js"></script>
-<script src="../js/admin/carTrip.js"></script>
-<script src="./js/cityselect.js"></script>
+<script src="../js/admin/ticket.js"></script>
 
 </html>

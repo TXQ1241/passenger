@@ -6,11 +6,12 @@ layui.use(['table'], function () {
     var laytpl = layui.laytpl;
     var element = layui.element;
     var tableTitle = {
-        code: '车次',
+        carTripCode: '车次',
         startStation: '始发站',
         arriveStation: '终点站',
         startTime: '始发时间',
-        arriveTime: '到达时间'
+        arriveTime: '到达时间',
+        price: '票价'
     };
     var userInfo;
     //获取用户信息
@@ -61,15 +62,23 @@ layui.use(['table'], function () {
     $('#logout').on('click', function () {
         window.location.href = window.location.origin + '/' + pageConfig.urlPrex + 'login/logout';
     });
+    //获取车次id
+    var carTripId;
+    ServerUtil.api('route', 'getCarTripId', {}, function (result) {
+        carTripId = result;
+    });
     //第一个实例
     table.render({
         elem: '#datalist',
         // height: 315,
-        url: window.location.origin + '/' + pageConfig.urlPrex + 'cartrip/getCarTripList',
+        url: window.location.origin + '/' + pageConfig.urlPrex + 'route/getRouteList',
         method: 'post',
         response: {
             statusCode: 1,
             dataName: 'datalist'
+        },
+        where: {
+            carTripCode: carTripId
         },
         request: {
             pageName: 'pageNum', //页码的参数名称，默认：page
@@ -90,13 +99,13 @@ layui.use(['table'], function () {
                     type: 'checkbox'
                 },
                 {
-                    field: 'code',
+                    field: 'carTripCode',
                     title: '车次',
                     // width: 150
                 }, {
                     field: 'startStation',
                     title: '始发站',
-                    width: 80
+                    // width: 80
                 }, {
                     field: 'arriveStation',
                     title: '终点站',
@@ -108,7 +117,10 @@ layui.use(['table'], function () {
                 }, {
                     field: 'arriveTime',
                     title: '到达时间',
-                    sort: true,
+                    // width: 200
+                }, {
+                    field: 'price',
+                    title: '票价',
                     // width: 200
                 }, {
                     fixed: 'right',
@@ -164,7 +176,7 @@ layui.use(['table'], function () {
             layer.confirm('真的删除么', {
                 skin: 'layui-layer-molv'
             }, function (index) {
-                ServerUtil.api('cartrip/', 'delete', {
+                ServerUtil.api('route/', 'delete', {
                     ids: data.id
                 }, function () {
                     // obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
@@ -189,6 +201,22 @@ layui.use(['table'], function () {
             laytpl(getTpl).render(userList, function (html) {
                 view.innerHTML = html;
             });
+            //获取车站列表
+            ServerUtil.api('station/', 'getStationList', {}, function (result) {
+                var allCity = [];
+                result.datalist.forEach(function (station) {
+                    var arr = [station.name, station.pinyin, station.sanzima];
+                    var str = arr.join('|')
+                    allCity.push(str);
+                });
+                setAllCity(allCity)
+                var citySelect1 = new Vcity.CitySelector({
+                    input: 'startStation'
+                });
+                var citySelect2 = new Vcity.CitySelector({
+                    input: 'arriveStation'
+                });
+            });
             layer.open({
                 title: '编辑',
                 type: 1,
@@ -200,7 +228,7 @@ layui.use(['table'], function () {
                     $('.table-edit-input').each(function (index, val) {
                         data[val.dataset.type] = $(val).val();
                     });
-                    ServerUtil.api('cartrip/', 'save', data, function () {
+                    ServerUtil.api('route/', 'save', data, function () {
                         //同步更新缓存对应的值
                         obj.update(data);
                         // tableReload();
@@ -213,8 +241,8 @@ layui.use(['table'], function () {
                 },
                 content: $('#tableBox')
             });
-        } else if (obj.event === 'toArrive') {
-            window.location.href = window.location.origin + window.location.pathname + '?carTripId=' + data.id;
+        } else if (obj.event === 'toTicket') {
+            window.location.href = window.location.origin + window.location.pathname + '?routeId=' + data.id;
         }
     });
 
@@ -240,7 +268,7 @@ layui.use(['table'], function () {
                 userIdsArr.push(val.id);
             });
             var userIdsStr = userIdsArr.join(',');
-            ServerUtil.api('cartrip/', 'delete', {
+            ServerUtil.api('route/', 'delete', {
                 ids: userIdsStr
             }, function () {
                 layer.close(index);
@@ -293,7 +321,7 @@ layui.use(['table'], function () {
                 $('.table-add-input').each(function (index, val) {
                     obj[val.dataset.type] = $(val).val();
                 });
-                ServerUtil.api('cartrip/', 'save', obj, function () {
+                ServerUtil.api('route/', 'save', obj, function () {
                     tableReload();
                     layer.close(index);
                 });
@@ -312,5 +340,8 @@ layui.use(['table'], function () {
     });
     $('#station').on('click', function () {
         window.location.href = window.location.origin + window.location.pathname + '?userType=2';
+    });
+    $('#carTrip').on('click', function () {
+        window.location.href = window.location.origin + window.location.pathname + '?userType=3';
     });
 });
