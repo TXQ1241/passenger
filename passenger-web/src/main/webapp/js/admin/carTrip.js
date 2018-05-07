@@ -277,10 +277,10 @@ layui.use(['table'], function () {
             });
             setAllCity(allCity)
             var citySelect1 = new Vcity.CitySelector({
-                input: 'startStation'
+                input: 'startStationName'
             });
             var citySelect2 = new Vcity.CitySelector({
-                input: 'arriveStation'
+                input: 'arriveStationName'
             });
         });
         //执行一个laydate实例
