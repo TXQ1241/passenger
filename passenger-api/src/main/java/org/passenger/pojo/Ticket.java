@@ -1,13 +1,11 @@
 package org.passenger.pojo;
 
-import java.util.Date;
-
 public class Ticket {
     private String id;
 
     private String routeId;
 
-    private Date ticketDate;
+    private String ticketDate;
     
     private Integer number;
 
@@ -27,13 +25,13 @@ public class Ticket {
         this.routeId = routeId;
     }
 
-    public Date getTicketDate() {
-        return ticketDate;
-    }
+	public String getTicketDate() {
+		return ticketDate;
+	}
 
-    public void setTicketDate(Date ticketDate) {
-        this.ticketDate = ticketDate;
-    }
+	public void setTicketDate(String ticketDate) {
+		this.ticketDate = ticketDate;
+	}
 
 	public Integer getNumber() {
 		return number;

@@ -4,7 +4,6 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.passenger.pojo.Route;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Date;
 
 public class RouteVo extends PageVo {
 	private String id;
@@ -19,7 +18,7 @@ public class RouteVo extends PageVo {
     private Double price;//票价
     private String carTripCode;//车次编码
     private String carTripId;//车次id
-    private Date date;//日期
+    private String date;//日期
 
     public RouteVo(){}
 
@@ -129,12 +128,12 @@ public class RouteVo extends PageVo {
 		this.carTripId = carTripId;
 	}
 
-	public Date getDate() {
-        return date;
-    }
+	public String getDate() {
+		return date;
+	}
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	public void setDate(String date) {
+		this.date = date;
+	}
 
 }

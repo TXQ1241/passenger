@@ -50,4 +50,12 @@ public interface ITicketService {
      * @return
      */
 	Ticket getTicketById(String ticketId);
+	
+	/**
+	 * 通过routeId和日期获取票数信息
+	 * @param routeId
+	 * @param date
+	 * @return
+	 */
+	List<Ticket> getTicketByRoAndDate(String routeId, String date);
 }

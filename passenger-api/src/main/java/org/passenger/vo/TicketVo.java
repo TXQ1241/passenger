@@ -1,18 +1,18 @@
 package org.passenger.vo;
 
 public class TicketVo extends PageVo {
-    private String passStationId;
+    private String routeId;
     private String ids;
 
-    public String getPassStationId() {
-        return passStationId;
-    }
+    public String getRouteId() {
+		return routeId;
+	}
 
-    public void setPassStationId(String passStationId) {
-        this.passStationId = passStationId;
-    }
+	public void setRouteId(String routeId) {
+		this.routeId = routeId;
+	}
 
-    public String getIds() {
+	public String getIds() {
         return ids;
     }
 

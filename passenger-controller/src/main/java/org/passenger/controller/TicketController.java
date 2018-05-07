@@ -38,7 +38,8 @@ public class TicketController {
 	@ResponseBody
 	public Map<String, String> setRouteId(HttpServletRequest request) {
 		Map<String, String> msgMap = new HashMap<String, String>();
-		String routeId = (String) request.getSession().getAttribute(Constants.TicketConstants.ROUTE_ID);
+		String routeId = (String) request.getSession().getServletContext()
+				.getAttribute(Constants.TicketConstants.ROUTE_ID);
 		msgMap.put(Constants.TicketConstants.ROUTE_ID, routeId);
 		return msgMap;
 	}
