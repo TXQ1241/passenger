@@ -297,13 +297,20 @@
             var data = obj.data;
             if (obj.event === 'buy') {
                 if (!isLogin) {
-                    window.location.href = window.location.origin + '/' + pageConfig.urlPrex + 'login.html';
+                    window.location.href = window.location.origin + '/' + pageConfig.urlPrex +
+                        'login.html';
                 } else {
-                    ServerUtil.api('order/', 'save', data, function (result) {
-                        layer.msg(result.msg, {
+                    if (data.ticketNum > 0) {
+                        ServerUtil.api('order/', 'save', data, function (result) {
+                            layer.msg(result.msg, {
+                                time: 1000
+                            });
+                        });
+                    } else {
+                        layer.msg('票已售空', {
                             time: 1000
                         });
-                    });
+                    }
                 }
             }
         });
