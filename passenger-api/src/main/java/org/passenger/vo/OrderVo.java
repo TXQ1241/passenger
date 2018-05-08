@@ -9,8 +9,8 @@ public class OrderVo extends PageVo {
 	private String id;
     private String userId;
     private String fare;//票价
-    private String startStation;//始发站
-    private String arriveStation;//到达站
+    private String startStationName;//始发站
+    private String arriveStationName;//到达站
     private String carTripCode;//车次
     private Double price;//车票数
     private String startTime;//出发时间
@@ -52,23 +52,19 @@ public class OrderVo extends PageVo {
     public void setFare(String fare) {
         this.fare = fare;
     }
-
-    public String getStartStation() {
-        return startStation;
-    }
-
-    public void setStartStation(String startStation) {
-        this.startStation = startStation;
-    }
-
-    public String getArriveStation() {
-        return arriveStation;
-    }
-
-    public void setArriveStation(String arriveStation) {
-        this.arriveStation = arriveStation;
-    }
     
+	public String getStartStationName() {
+		return startStationName;
+	}
+	public void setStartStationName(String startStationName) {
+		this.startStationName = startStationName;
+	}
+	public String getArriveStationName() {
+		return arriveStationName;
+	}
+	public void setArriveStationName(String arriveStationName) {
+		this.arriveStationName = arriveStationName;
+	}
 	public String getCarTripCode() {
 		return carTripCode;
 	}
