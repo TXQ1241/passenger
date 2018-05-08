@@ -16,11 +16,11 @@
   </resultMap>
   
   <sql id="Get_Route_Sql">
-  	<if test="startStationName != null and startStationName != ''">
-  		and r.start_station_name like '%${startStationName}%'
+  	<if test="startStationId != null and startStationId != ''">
+  		and r.start_station_id = #{startStationId}
   	</if>
-  	<if test="arriveStationName != null and arriveStationName != ''">
-  		and r.arrive_station_name like '%${arriveStationName}%'
+  	<if test="arriveStationId != null and arriveStationId != ''">
+  		and r.arrive_station_id = #{arriveStationId}
   	</if>
   </sql>
 	

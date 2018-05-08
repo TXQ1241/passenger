@@ -19,4 +19,6 @@ public interface TicketMapper {
     void deleteTicketByIds(String[] ids);
 
 	Ticket getTicketById(String ticketId);
+
+	List<Ticket> getTicketByRoAndDate(Ticket ticket);
 }
