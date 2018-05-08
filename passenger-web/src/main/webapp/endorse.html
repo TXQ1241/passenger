@@ -189,7 +189,8 @@
         table.render({
             elem: '#datalist',
             // height: 315,
-            url: window.location.origin + '/' + pageConfig.urlPrex + 'arrvieStation/getArrvieStationList',
+            url: window.location.origin + '/' + pageConfig.urlPrex +
+                'arrvieStation/getArrvieStationList',
             method: 'post',
             response: {
                 statusCode: 1,
@@ -274,15 +275,22 @@
             var data = obj.data;
             if (obj.event === 'buy') {
                 if (!isLogin) {
-                    window.location.href = window.location.origin + '/' + pageConfig.urlPrex + 'login.html';
+                    window.location.href = window.location.origin + '/' + pageConfig.urlPrex +
+                        'login.html';
                 } else {
-                    ServerUtil.api('order/', 'save', {
+                    if (data.ticketNum > 0) {
+                        ServerUtil.api('order/', 'save', {
 
-                    }, function (result) {
-                        layer.msg(result.msg, {
+                        }, function (result) {
+                            layer.msg(result.msg, {
+                                time: 1000
+                            });
+                        });
+                    } else {
+                        layer.msg('票已售空', {
                             time: 1000
                         });
-                    });
+                    }
                 }
             }
         });
