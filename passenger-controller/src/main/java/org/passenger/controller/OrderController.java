@@ -64,12 +64,8 @@ public class OrderController {
 	@ResponseBody
 	public Map<String, String> saveOrder(HttpServletRequest request,@RequestBody Orders orders) {
 		Map<String, String> msgMap = new HashMap<String, String>();
-		User user = (User) request.getSession().getAttribute(Constants.CURRENT_USER);
-		if(user != null) {
-			orders.setUserId(user.getId());
-		}
 		try {
-			orderService.saveOrders(orders);
+			orderService.saveOrders(request,orders);
 			msgMap.put(Constants.AjaxStatus.AJAX_SUCCESS,"删除订单信息成功");
 		} catch (Exception e) {
 			e.printStackTrace();

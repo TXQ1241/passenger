@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.passenger.common.Constants;
 import org.passenger.dao.OrdersMapper;
 import org.passenger.pojo.CarTrip;
 import org.passenger.pojo.Orders;
 import org.passenger.pojo.Route;
 import org.passenger.pojo.Ticket;
+import org.passenger.pojo.User;
 import org.passenger.utils.StringUtils;
 import org.passenger.vo.OrderVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +39,10 @@ public class OrderServiceImpl implements IOrderService {
     @Autowired
     @Qualifier("routeService")
     IRouteService routeService;
+    
+    @Autowired
+    @Qualifier("userService")
+    IUserService userService;
     
     public List<Orders> getOrders(OrderVo orderVo) {
         return orderMapper.getOrderList(orderVo);
@@ -85,7 +93,12 @@ public class OrderServiceImpl implements IOrderService {
 		return voList;
 	}
 
-	public void saveOrders(Orders orders) {
+	public void saveOrders(HttpServletRequest request, Orders orders) {
+		
+		User user = (User) request.getSession().getAttribute(Constants.CURRENT_USER);
+		if(user != null) {
+			orders.setUserId(user.getId());
+		}
 		
 		if(StringUtils.isNotBlank(orders.getTicketId())) {
 			Ticket ticket = ticketService.getTicketById(orders.getTicketId());
@@ -107,6 +120,15 @@ public class OrderServiceImpl implements IOrderService {
 			}
 			
 		} else {
+			double balance = getDouble(user.getUserBalance());
+			if(StringUtils.isNotBlank(orders.getRouteId())) {
+				Route route = routeService.getRouteById(orders.getRouteId());
+				if(route != null) {
+					balance = balance - getDouble(route.getPrice());
+				}
+			}
+			user.setUserBalance(balance);
+			userService.update(user);
 			orders.setId(StringUtils.getUUID());
 			orders.setCreateTime(new Date());
 			this.save(orders);
@@ -115,5 +137,12 @@ public class OrderServiceImpl implements IOrderService {
 
 	public Orders getOrdersById(String id) {
 		return orderMapper.getOrdersById(id);
+	}
+	
+	private double getDouble(Double num) {
+		if(num == null) {
+			num = 0d;
+		}
+		return num;
 	}
 }

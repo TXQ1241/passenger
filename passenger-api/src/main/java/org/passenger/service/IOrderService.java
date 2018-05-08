@@ -5,6 +5,8 @@ import org.passenger.vo.OrderVo;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * 订单管理接口
  * @author Administrator
@@ -36,7 +38,7 @@ public interface IOrderService {
      */
 	List<OrderVo> getOrderVos(OrderVo orderVo);
 
-	void saveOrders(Orders orders);
+	void saveOrders(HttpServletRequest request, Orders orders);
 	
 	Orders getOrdersById(String id);
 }
