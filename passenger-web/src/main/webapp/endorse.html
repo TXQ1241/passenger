@@ -276,7 +276,7 @@
                 if (!isLogin) {
                     window.location.href = window.location.origin + '/' + pageConfig.urlPrex + 'login.html';
                 } else {
-                    ServerUtil.api('', '', {
+                    ServerUtil.api('order/', 'save', {
 
                     }, function (result) {
                         layer.msg(result.msg, {

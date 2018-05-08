@@ -299,9 +299,7 @@
                 if (!isLogin) {
                     window.location.href = window.location.origin + '/' + pageConfig.urlPrex + 'login.html';
                 } else {
-                    ServerUtil.api('order/', 'save', {
-                        
-                    }, function (result) {
+                    ServerUtil.api('order/', 'save', data, function (result) {
                         layer.msg(result.msg, {
                             time: 1000
                         });
