@@ -70,7 +70,7 @@
   
   <!-- 通过id获取线路信息 -->
   <select id="getRouteById" resultMap="BaseResultMap" parameterType="java.lang.String">
-  	select route r where r.id = #{id}
+  	select * from route r where r.id = #{id}
   </select>
   
   <!-- 获取线路数 -->

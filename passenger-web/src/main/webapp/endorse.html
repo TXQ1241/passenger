@@ -148,6 +148,7 @@
     layui.use(['laydate', 'table'], function () {
         jQuery = layui.$;
         $ = layui.$;
+        var table = layui.table;
         var laydate = layui.laydate;
         var src = decodeURI(getQueryVariable('src'));
         var target = decodeURI(getQueryVariable('target'));
@@ -181,7 +182,6 @@
                 elem: '#dateSelect', //指定元素
                 min: 0,
                 max: 30,
-                value: new Date(),
                 btns: ['now']
             });
         });
@@ -191,22 +191,17 @@
             elem: '#datalist',
             // height: 315,
             url: window.location.origin + '/' + pageConfig.urlPrex +
-                'arrvieStation/getArrvieStationList',
+                'route/getRoutes',
             method: 'post',
             response: {
                 statusCode: 1,
                 dataName: 'datalist'
             },
-            request: {
-                pageName: 'pageNum', //页码的参数名称，默认：page
-                limitName: 'pageSize', //每页数据量的参数名，默认：limit
-                page: 0,
-                limit: 100
-            },
             where: {
-                startStation: src,
-                arriveStation: target,
-                ticketDate: date
+                startStationName: src,
+                arriveStationName: target,
+                date: date,
+                id: routeId
             },
             id: 'poemUsers',
             done: function (res) {
@@ -219,11 +214,11 @@
                         title: '车次',
                         // width: 150
                     }, {
-                        field: 'startStation',
+                        field: 'startStationName',
                         title: '始发站',
                         // width: 80
                     }, {
-                        field: 'arriveStation',
+                        field: 'arriveStationName',
                         title: '终点站',
                         // width: 150
                     }, {
@@ -239,7 +234,7 @@
                         title: '剩余票数',
                         // width: 200
                     }, {
-                        field: 'fare',
+                        field: 'price',
                         title: '票价',
                         // width: 200
                     }, {
@@ -267,9 +262,9 @@
             var target1 = $('#citySelect2').val();
             var date1 = $('#dateSelect').text();
             tableReload({
-                startStation: src1,
-                arriveStation: target1,
-                ticketDate: date1
+            	startStationName: src1,
+            	arriveStationName: target1,
+                date: date1
             })
         });
         table.on('tool(tableBtn)', function (obj) {
@@ -283,7 +278,7 @@
                         data.id = orderId;
                         data.routeId = routeId;
                         ServerUtil.api('order/', 'save', data, function (result) {
-                            layer.msg(result.msg, {
+                            layer.msg('改签成功', {
                                 time: 1000
                             });
                         });

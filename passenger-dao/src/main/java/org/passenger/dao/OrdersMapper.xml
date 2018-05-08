@@ -36,16 +36,16 @@
   <!-- 跟新订单信息 -->
   <update id="update" parameterType="org.passenger.pojo.Orders" >
     update orders
-    set id = #{record.id,jdbcType=VARCHAR},
-      fare_code = #{record.fareCode,jdbcType=VARCHAR},
-      user_id = #{record.userId,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      ticket_id = #{record.ticketId,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=VARCHAR},
-      car_trip_id = #{record.carTripId,jdbcType=VARCHAR}
-      start_station_name = #{record.startStationName,jdbcType=VARCHAR},
-      arrive_station_name = #{record.arriveStationName,jdbcType=VARCHAR},
-      route_id = #{record.routeId,jdbcType=VARCHAR}
+    set id = #{id,jdbcType=VARCHAR},
+      fare_code = #{fareCode,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      ticket_id = #{ticketId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      car_trip_id = #{carTripId,jdbcType=VARCHAR}
+      start_station_name = #{startStationName,jdbcType=VARCHAR},
+      arrive_station_name = #{arriveStationName,jdbcType=VARCHAR},
+      route_id = #{routeId,jdbcType=VARCHAR}
 	where id = #{id,jdbcType=VARCHAR}
   </update>
   
