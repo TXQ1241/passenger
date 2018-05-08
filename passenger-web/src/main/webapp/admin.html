@@ -86,6 +86,19 @@
         {{# }); }}
     </table>
 </script>
+<!-- 新增和编辑面板 -->
+<script type="text/html" id="tableEdit">
+    <table class="layui-table">
+        {{# layui.each(d, function(index, item){ }}
+        <tr>
+            <td>{{ item.title }}</td>
+            <td>
+                <input type="text" data-type="{{item.field}}" value="{{ item.val }}" class="{{item.className}}">
+            </td>
+        </tr>
+        {{# }); }}
+    </table>
+</script>
 <script src="../libs/layui/layui.all.js"></script>
 <script src="../js/ServerUtil.js"></script>
 <script src="../js/admin/admin.js"></script>

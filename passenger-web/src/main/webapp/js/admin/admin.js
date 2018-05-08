@@ -32,6 +32,11 @@ layui.use(['table'], function () {
                 userList.push(dataObj);
             }
         }
+        var getTpl = tableEdit.innerHTML,
+            view = document.getElementById('tableBox');
+        laytpl(getTpl).render(userList, function (html) {
+            view.innerHTML = html;
+        });
         layer.open({
             title: '修改信息',
             type: 1,
