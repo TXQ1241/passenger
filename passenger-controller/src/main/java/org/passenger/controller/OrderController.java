@@ -72,6 +72,7 @@ public class OrderController {
 			orderService.saveOrders(orders);
 			msgMap.put(Constants.AjaxStatus.AJAX_SUCCESS,"删除订单信息成功");
 		} catch (Exception e) {
+			e.printStackTrace();
 			msgMap.put(Constants.AjaxStatus.AJAX_FAIL,"删除订单信息失败");
 		}
 		return msgMap;

@@ -288,9 +288,9 @@
                 });
             } else {
                 tableReload({
-                    startStation: src1,
-                    arriveStation: target1,
-                    ticketDate: date1
+                    startStationName: src1,
+                    arriveStationName: target1,
+                    date: date1
                 })
             }
         });
@@ -305,7 +305,7 @@
                 } else {
                     if (data.ticketNum > 0) {
                         ServerUtil.api('order/', 'save', data, function (result) {
-                            layer.msg(result.msg, {
+                            layer.msg('购买成功', {
                                 time: 1000
                             });
                         });

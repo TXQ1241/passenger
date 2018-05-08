@@ -127,4 +127,38 @@ public class UserController {
         return msgMap;
     }
 	
+    /**
+     *  @Description: 修改密码
+     *  @author admin
+     *  @method changePassword
+     *  params  [user] 用户对象
+     *  @return 操作信息
+     *  @exception
+     **/
+    @RequestMapping("changePassword")
+    @ResponseBody
+    public Map<String, String> changePassword(HttpServletRequest request, @RequestBody User user) {   	
+    	Map<String, String> msgMap = new HashMap<String, String>();
+    	String status = Constants.AjaxStatus.AJAX_SUCCESS;
+    	String msg = "修改密码成功";
+    	User userInfo = new User();
+    	try {
+	    	List<User> userList = userService.getUser(user);		
+	    	if (userList != null && userList.size()>0) {
+	    		userInfo = userList.get(0);
+	        	userInfo.setPassword(user.getPassword());
+	        	userService.update(userInfo);	        	
+	        	request.getSession().setAttribute(Constants.CURRENT_USER, null);
+	    	}else {
+	    		status = Constants.AjaxStatus.AJAX_FAIL;
+	    		msg = "当前用户不存在，请联系管理员";
+	    	}
+    	} catch (Exception e) {
+    		status = Constants.AjaxStatus.AJAX_FAIL;
+    		msg = "修改密码异常，请联系管理员";
+    	}
+    	msgMap.put(status, msg);
+    	return msgMap;    	
+    }
+    
 }

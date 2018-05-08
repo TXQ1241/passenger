@@ -72,6 +72,7 @@ public class OrderServiceImpl implements IOrderService {
 
 					Route route = routeService.getRouteById(order.getRouteId());
 					if(route != null) {
+						vo.setRouteId(route.getId());
 						vo.setStartTime(route.getStartTime());
 						vo.setArriveTime(route.getArriveTime());
 						vo.setPrice(route.getPrice());
@@ -101,7 +102,7 @@ public class OrderServiceImpl implements IOrderService {
 					Ticket ticketInfo =  ticketService.getTicketById(ordersInfo.getTicketId());
 					int ticketNumInfo = ticketInfo.getNumber();
 					ticketInfo.setNumber(++ticketNumInfo);
-					this.update(ordersInfo);
+					ticketService.update(ticketInfo);
 				}
 			}
 			
