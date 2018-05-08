@@ -280,7 +280,8 @@
                         'login.html';
                 } else {
                     if (data.ticketNum > 0) {
-                        
+                        data.id = orderId;
+                        data.routeId = routeId;
                         ServerUtil.api('order/', 'save', data, function (result) {
                             layer.msg(result.msg, {
                                 time: 1000
