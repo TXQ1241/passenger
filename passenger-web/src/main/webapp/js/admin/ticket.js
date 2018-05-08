@@ -10,6 +10,14 @@ layui.use(['table'], function () {
         ticketDate: '日期',
         number: '票数'
     };
+    var userTitle = {
+        account: '账号',
+        password: '密码',
+        userName: '用户名',
+        email: '邮箱',
+        phoneNum: '手机号',
+        idCard: '身份证号'
+    };
     var userInfo;
     //获取用户信息
     ServerUtil.api('user/', 'getUserInfo', {}, function (data) {
@@ -20,9 +28,9 @@ layui.use(['table'], function () {
     $('#changeUserInfo').on('click', function () {
         var userList = [];
         for (var attr in userInfo) {
-            if (tableTitle[attr]) {
+            if (userTitle[attr]) {
                 var dataObj = {};
-                dataObj.title = tableTitle[attr];
+                dataObj.title = userTitle[attr];
                 dataObj.val = userInfo[attr] || '';
                 dataObj.field = attr;
                 dataObj.className = 'table-edit-input';

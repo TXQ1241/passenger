@@ -294,6 +294,10 @@
                 })
             }
         });
+        var userInfo;
+        ServerUtil.api('user/', 'getUserInfo', {}, function (data) {
+			userInfo = data;
+		});
         table.on('tool(tableBtn)', function (obj) {
             var data = obj.data;
             obj.data.routeId = obj.data.id;
@@ -303,15 +307,19 @@
                     window.location.href = window.location.origin + '/' + pageConfig.urlPrex +
                         'login.html';
                 } else {
-                    if (data.ticketNum > 0) {
+                    if (data.ticketNum <= 0) {
+                        layer.msg('票已售空', {
+                            time: 1000
+                        });
+                    } else if (userInfo.balance < data.price) {
+                        layer.msg('余额不足，请充值', {
+                            time: 1000
+                        });
+                    } else {
                         ServerUtil.api('order/', 'save', data, function (result) {
                             layer.msg('购买成功', {
                                 time: 1000
                             });
-                        });
-                    } else {
-                        layer.msg('票已售空', {
-                            time: 1000
                         });
                     }
                 }
