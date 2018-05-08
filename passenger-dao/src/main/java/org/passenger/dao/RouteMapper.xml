@@ -22,6 +22,9 @@
   	<if test="arriveStationId != null and arriveStationId != ''">
   		and r.arrive_station_id = #{arriveStationId}
   	</if>
+  	<if test="carTripId != null and carTripId != ''">
+  		and r.car_trip_id = #{carTripId}
+  	</if>
   </sql>
 	
   <!-- 保存订单信息 -->

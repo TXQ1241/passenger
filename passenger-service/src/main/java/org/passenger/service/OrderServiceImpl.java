@@ -1,6 +1,7 @@
 package org.passenger.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.passenger.dao.OrdersMapper;
@@ -80,5 +81,24 @@ public class OrderServiceImpl implements IOrderService {
 			}
 		}
 		return voList;
+	}
+
+	public void saveOrders(Orders orders) {
+		
+		//修改票数
+		if(StringUtils.isNotBlank(orders.getTicketId())) {
+			Ticket ticket = ticketService.getTicketById(orders.getTicketId());
+			int ticketNum = ticket.getNumber();
+			ticket.setNumber(--ticketNum);
+			ticketService.update(ticket);
+		}
+		
+		if(StringUtils.isNotBlank(orders.getId())) {
+			this.update(orders);
+		} else {
+			orders.setId(StringUtils.getUUID());
+			orders.setCreateTime(new Date());
+			this.save(orders);
+		}
 	}
 }

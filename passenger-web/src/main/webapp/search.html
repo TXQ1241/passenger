@@ -150,6 +150,7 @@
     layui.use(['laydate', 'table'], function () {
         jQuery = layui.$;
         $ = layui.$;
+        var table = layui.table;
         var laydate = layui.laydate;
         var src = decodeURI(getQueryVariable('src'));
         var target = decodeURI(getQueryVariable('target'));
@@ -208,16 +209,16 @@
                 statusCode: 1,
                 dataName: 'datalist'
             },
-            request: {
-                pageName: 'pageNum', //页码的参数名称，默认：page
-                limitName: 'pageSize', //每页数据量的参数名，默认：limit
-                page: 0,
-                limit: 100
-            },
+            //request: {
+            //    pageName: 'pageNum', //页码的参数名称，默认：page
+            //    limitName: 'pageSize', //每页数据量的参数名，默认：limit
+            //    page: 0,
+            //    limit: 100
+            //},
             where: {
-                startStation: src,
-                arriveStation: target,
-                ticketDate: date
+                startStationName: src,
+                arriveStationName: target,
+                date: date
             },
             id: 'poemUsers',
             done: function (res) {
@@ -230,11 +231,11 @@
                         title: '车次',
                         // width: 150
                     }, {
-                        field: 'startStation',
+                        field: 'startStationName',
                         title: '始发站',
                         // width: 80
                     }, {
-                        field: 'arriveStation',
+                        field: 'arriveStationName',
                         title: '终点站',
                         // width: 150
                     }, {
@@ -250,7 +251,7 @@
                         title: '剩余票数',
                         // width: 200
                     }, {
-                        field: 'fare',
+                        field: 'price',
                         title: '票价',
                         // width: 200
                     }, {
@@ -295,6 +296,8 @@
         });
         table.on('tool(tableBtn)', function (obj) {
             var data = obj.data;
+            obj.data.routeId = obj.data.id;
+            obj.data.id = "";
             if (obj.event === 'buy') {
                 if (!isLogin) {
                     window.location.href = window.location.origin + '/' + pageConfig.urlPrex +

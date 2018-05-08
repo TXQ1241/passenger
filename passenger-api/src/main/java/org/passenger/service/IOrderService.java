@@ -35,4 +35,6 @@ public interface IOrderService {
      * @return
      */
 	List<OrderVo> getOrderVos(OrderVo orderVo);
+
+	void saveOrders(Orders orders);
 }
