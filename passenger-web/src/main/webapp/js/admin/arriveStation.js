@@ -77,7 +77,7 @@ layui.use(['table'], function () {
                 dataName: 'datalist'
             },
             where: {
-                carTripCode: carTripId
+                carTripId: carTripId
             },
             request: {
                 pageName: 'pageNum', //页码的参数名称，默认：page
