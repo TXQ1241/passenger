@@ -12,4 +12,5 @@ public interface OrdersMapper {
 	int getOrderCount(OrderVo orderVo);
     int insert(Orders order);
     int update(Orders order);
+	Orders getOrdersById(String id);
 }

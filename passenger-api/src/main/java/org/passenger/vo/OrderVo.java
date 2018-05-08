@@ -6,7 +6,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.passenger.pojo.Orders;
 
 public class OrderVo extends PageVo {
-
+	private String id;
     private String userId;
     private String fare;//票价
     private String startStation;//始发站
@@ -15,7 +15,8 @@ public class OrderVo extends PageVo {
     private Double price;//车票数
     private String startTime;//出发时间
     private String arriveTime;//到达时间
-    private String ticketDate;//票日期
+    private String routeId;//线路id
+    private String ticketDate;//票数日期
     
     public OrderVo () {}
     public OrderVo (Orders orders) {
@@ -29,8 +30,14 @@ public class OrderVo extends PageVo {
 			e.printStackTrace();
 		}
     }
-
-    public String getUserId() {
+    
+    public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getUserId() {
         return userId;
     }
 
@@ -87,6 +94,12 @@ public class OrderVo extends PageVo {
 	}
 	public void setArriveTime(String arriveTime) {
 		this.arriveTime = arriveTime;
+	}
+	public String getRouteId() {
+		return routeId;
+	}
+	public void setRouteId(String routeId) {
+		this.routeId = routeId;
 	}
 	public String getTicketDate() {
 		return ticketDate;

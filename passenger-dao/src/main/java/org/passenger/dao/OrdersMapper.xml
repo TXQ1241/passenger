@@ -60,6 +60,10 @@
   	</if>
   </select>
   
+  <select id="getOrdersById" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select * from orders o where o.id = #{id}
+  </select>
+  
   <!-- 获取订单记录数 -->
   <select id="getOrderCount" resultType="java.lang.Integer" parameterType="org.passenger.vo.OrderVo">
   	select count(*) from orders o
