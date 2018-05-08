@@ -16,6 +16,8 @@ public class Orders {
     private String status;
 
     private String carTripId;
+    
+    private String routeId;
 
     private String startStationName;
 
@@ -76,8 +78,16 @@ public class Orders {
     public void setCarTripId(String carTripId) {
         this.carTripId = carTripId;
     }
+    
+    public String getRouteId() {
+		return routeId;
+	}
 
-    public String getStartStationName() {
+	public void setRouteId(String routeId) {
+		this.routeId = routeId;
+	}
+
+	public String getStartStationName() {
         return startStationName;
     }
 

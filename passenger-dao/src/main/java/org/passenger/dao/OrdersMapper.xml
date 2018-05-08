@@ -11,6 +11,7 @@
         <result column="car_trip_id" jdbcType="VARCHAR" property="carTripId" />
         <result column="start_station_name" jdbcType="VARCHAR" property="startStationName" />
         <result column="arrive_station_name" jdbcType="VARCHAR" property="arriveStationName" />
+        <result column="route_id" jdbcType="VARCHAR" property="routeId"/>
     </resultMap>
   
   <!-- 查询订单脚本 -->
@@ -24,11 +25,12 @@
   <insert id="insert" parameterType="org.passenger.pojo.Orders">
     insert into orders (id, fare_code, user_id,
       create_time, ticket_id, status,
-      car_trip_id, start_station_name, arrive_station_name
+      car_trip_id, start_station_name, arrive_station_name, route_id
       )
     values (#{id,jdbcType=VARCHAR}, #{fareCode,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
       #{createTime,jdbcType=TIMESTAMP}, #{ticketId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
-      #{carTripId,jdbcType=VARCHAR}, #{startStationName,jdbcType=VARCHAR}, #{arriveStationName,jdbcType=VARCHAR}
+      #{carTripId,jdbcType=VARCHAR}, #{startStationName,jdbcType=VARCHAR}, #{arriveStationName,jdbcType=VARCHAR},
+      #{routeId,jdbcType=VARCHAR}
       )
   </insert>
   <!-- 跟新订单信息 -->
@@ -42,12 +44,13 @@
       status = #{record.status,jdbcType=VARCHAR},
       car_trip_id = #{record.carTripId,jdbcType=VARCHAR}
       start_station_name = #{record.startStationName,jdbcType=VARCHAR},
-      arrive_station_name = #{record.arriveStationName,jdbcType=VARCHAR}
+      arrive_station_name = #{record.arriveStationName,jdbcType=VARCHAR},
+      route_id = #{record.routeId,jdbcType=VARCHAR}
 	where id = #{id,jdbcType=VARCHAR}
   </update>
   
   <!-- 获取订单记录 -->
-  <select id="getOrders" resultMap="BaseResultMap" parameterType = "org.passenger.vo.OrderVo" >
+  <select id="getOrderList" resultMap="BaseResultMap" parameterType = "org.passenger.vo.OrderVo" >
   	select * from orders o
   	<where>
   		<include refid="Get_Orders_Sql"></include>

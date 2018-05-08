@@ -50,4 +50,18 @@ public interface IRouteService {
      * @param routeVo
      */
 	void saveRoute(RouteVo routeVo);
+	
+	/**
+	 * 获取线路信息
+	 * @param routeVo
+	 * @return
+	 */
+	List<RouteVo> getRouteInfoList(RouteVo routeVo);
+	
+	/**
+	 * 通过id获取线路信息
+	 * @param id
+	 * @return
+	 */
+	Route getRouteById(String id);
 }

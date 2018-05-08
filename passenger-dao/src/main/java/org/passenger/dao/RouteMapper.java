@@ -15,4 +15,6 @@ public interface RouteMapper {
     int update(Route route);
     
     void deleteRouteByIds(String[] ids);
+
+	Route getRouteById(String id);
 }

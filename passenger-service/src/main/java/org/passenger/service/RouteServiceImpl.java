@@ -57,6 +57,70 @@ public class RouteServiceImpl implements IRouteService {
 
     public List<RouteVo> getRouteVoList(RouteVo routeVo) {
     	
+		//车次中设置车站名称id
+    	routeVo = setStationId(routeVo);
+    	
+    	List<RouteVo> voList = new ArrayList<RouteVo> ();
+    	List<Route> routeList = this.getRouteList(routeVo);
+    	if(routeList != null && routeList.size() > 0) {
+    		for(Route route:routeList) {
+			RouteVo vo = new RouteVo(route);
+			if(StringUtils.isNotBlank(route.getCarTripId())) {
+				CarTrip carTrip = carTripService.getCarTripById(route.getCarTripId());
+				vo.setCarTripCode(carTrip.getCode());
+			}
+			voList.add(vo);
+    		}
+    	}
+        return voList;
+    }
+
+	public void saveRoute(RouteVo routeVo) {
+		try {
+			//车次中设置车站名称
+			routeVo = setStationId(routeVo);
+			Route route = new Route(routeVo);
+			if(StringUtils.isNotBlank(route.getId())) {
+				this.update(route);
+			} else {
+				route.setId(StringUtils.getUUID());
+				this.save(route);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public List<RouteVo> getRouteInfoList(RouteVo routeVo) {
+		routeVo = setStationId(routeVo);
+    	List<RouteVo> voList = new ArrayList<RouteVo> ();
+    	List<Route> routeList = this.getRouteList(routeVo);
+    	if(routeList != null && routeList.size() > 0) {
+    		for(Route route:routeList) {
+    			List<Ticket> ticketList = ticketService.getTicketByRoAndDate(route.getId(),routeVo.getDate());
+    			if(ticketList != null && ticketList.size() > 0 ) {
+    				for (Ticket t:ticketList) {
+    	    			RouteVo vo = new RouteVo(route);
+    	    			if(StringUtils.isNotBlank(route.getCarTripId())) {
+    	    				CarTrip carTrip = carTripService.getCarTripById(route.getCarTripId());
+    	    				vo.setCarTripCode(carTrip.getCode());
+    	    			}
+    	    			vo.setTicketNum(t.getNumber());
+    	    			vo.setTicketId(t.getId());
+    	    			voList.add(vo);
+    				}
+    			}
+    		}
+    	}
+    	return voList;
+	}
+	
+	/**
+	 * 设置线路车站id
+	 * @param routeVo
+	 * @return
+	 */
+	private RouteVo setStationId(RouteVo routeVo) {
 		//车次中设置车站名称
 		if(StringUtils.isNotBlank(routeVo.getStartStationName())) {
 			List<Station> stationList = stationService.getStationByName(routeVo.getStartStationName());
@@ -72,54 +136,10 @@ public class RouteServiceImpl implements IRouteService {
 				routeVo.setArriveStationId(arriveStation.getId());
 			}
 		}
-    	
-    	List<RouteVo> voList = new ArrayList<RouteVo> ();
-    	List<Route> routeList = this.getRouteList(routeVo);
-    	if(routeList != null && routeList.size() > 0) {
-    		for(Route route:routeList) {
-    			List<Ticket> ticketList = ticketService.getTicketByRoAndDate(route.getId(),routeVo.getDate());
-    			if(ticketList != null && ticketList.size() > 0 ) {
-    				for (Ticket t:ticketList) {
-    	    			RouteVo vo = new RouteVo(route);
-    	    			if(StringUtils.isNotBlank(route.getCarTripId())) {
-    	    				CarTrip carTrip = carTripService.getCarTripById(route.getCarTripId());
-    	    				vo.setCarTripCode(carTrip.getCode());
-    	    			}
-    	    			vo.setTicketNum(t.getNumber());
-    	    			voList.add(vo);
-    				}
-    			}
-    		}
-    	}
-        return voList;
-    }
+		return routeVo;
+	}
 
-	public void saveRoute(RouteVo routeVo) {
-		try {
-			//车次中设置车站名称
-			if(StringUtils.isNotBlank(routeVo.getStartStationName())) {
-				List<Station> stationList = stationService.getStationByName(routeVo.getStartStationName());
-				if(stationList != null && stationList.size() > 0) {
-					Station startStation = stationList.get(0);
-					routeVo.setStartStationId(startStation.getId());
-				}
-			}
-			if(StringUtils.isNotBlank(routeVo.getArriveStationName())) {
-				List<Station> stationList = stationService.getStationByName(routeVo.getArriveStationName());
-				if(stationList != null && stationList.size() > 0) {
-					Station arriveStation = stationList.get(0);
-					routeVo.setArriveStationId(arriveStation.getId());
-				}
-			}
-			Route route = new Route(routeVo);
-			if(StringUtils.isNotBlank(route.getId())) {
-				this.update(route);
-			} else {
-				route.setId(StringUtils.getUUID());
-				this.save(route);
-			}
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
+	public Route getRouteById(String id) {
+		return routeMapper.getRouteById(id);
 	}
 }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository("orderMapper")
 public interface OrdersMapper {
 	
-	List<Orders> getOrdersList(OrderVo orderVo);
+	List<Orders> getOrderList(OrderVo orderVo);
 	int getOrderCount(OrderVo orderVo);
     int insert(Orders order);
     int update(Orders order);

@@ -117,8 +117,8 @@ public class RouteController {
     public DataVo getRoutes(RouteVo routeVo) {
         DataVo dataVo = new DataVo();
         try {
-            List<RouteVo> userList = routeService.getRouteVoList(routeVo);
-            dataVo.setDatalist(userList);
+            List<RouteVo> routeList = routeService.getRouteInfoList(routeVo);
+            dataVo.setDatalist(routeList);
             dataVo.setCode(Constants.DataCode.SUCCESS);
             dataVo.setMsg("数据获取成功");
         } catch (Exception e) {

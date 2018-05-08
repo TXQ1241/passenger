@@ -6,6 +6,7 @@ import java.util.List;
 import org.passenger.dao.OrdersMapper;
 import org.passenger.pojo.CarTrip;
 import org.passenger.pojo.Orders;
+import org.passenger.pojo.Route;
 import org.passenger.pojo.Ticket;
 import org.passenger.utils.StringUtils;
 import org.passenger.vo.OrderVo;
@@ -30,8 +31,12 @@ public class OrderServiceImpl implements IOrderService {
     @Qualifier("ticketService")
     ITicketService ticketService;
     
+    @Autowired
+    @Qualifier("routeService")
+    IRouteService routeService;
+    
     public List<Orders> getOrders(OrderVo orderVo) {
-        return orderMapper.getOrdersList(orderVo);
+        return orderMapper.getOrderList(orderVo);
     }
 
     public Integer getOrderCount(OrderVo orderVo) {
@@ -55,10 +60,20 @@ public class OrderServiceImpl implements IOrderService {
 				if(StringUtils.isNotBlank(order.getCarTripId())) {
 					CarTrip carTrip = carTripService.getCarTripById(order.getCarTripId());
 					vo.setCarTripCode(carTrip.getCode());
-				} 
+				}
 				if(StringUtils.isNotBlank(order.getTicketId())) {
 					Ticket ticket = ticketService.getTicketById(order.getTicketId());
-					vo.setTicketNum(ticket.getNumber());
+					if(ticket != null) {
+						vo.setTicketDate(ticket.getTicketDate());
+					}
+				}
+				if(StringUtils.isNotBlank(order.getRouteId())) {
+					Route route = routeService.getRouteById(order.getRouteId());
+					if(route != null) {
+						vo.setStartTime(route.getStartTime());
+						vo.setArriveTime(route.getArriveTime());
+						vo.setPrice(route.getPrice());
+					}
 				}
 				
 				voList.add(vo);
