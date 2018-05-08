@@ -212,7 +212,7 @@
 					});
 				});
 			} else if (obj.event === 'save') {
-				window.location.href = window.location.origin + '/' + pageConfig +  'endorse.html?src=' + encodeURI(data.startStation) + '&target=' + encodeURI(data.arriveStation) + '&date=' + encodeURI(date) + '&orderId=' + data.id;
+				window.location.href = window.location.origin + '/' + pageConfig +  'endorse.html?src=' + encodeURI(data.startStation) + '&target=' + encodeURI(data.arriveStation) + '&date=' + encodeURI(date) + '&orderId=' + data.id + '&routeId=' + data.routeId;
 			}
 		});
 	});

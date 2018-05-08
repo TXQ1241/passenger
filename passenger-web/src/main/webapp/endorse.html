@@ -153,6 +153,7 @@
         var target = decodeURI(getQueryVariable('target'));
         var date = decodeURI(getQueryVariable('date'));
         var orderId = getQueryVariable('orderId');
+        var routeId = getQueryVariable('routeId');
         $('#citySelect1').val(src);
         $('#citySelect2').val(target);
         $('#dateSelect').text(date);
@@ -279,9 +280,8 @@
                         'login.html';
                 } else {
                     if (data.ticketNum > 0) {
-                        ServerUtil.api('order/', 'save', {
-
-                        }, function (result) {
+                        
+                        ServerUtil.api('order/', 'save', data, function (result) {
                             layer.msg(result.msg, {
                                 time: 1000
                             });
