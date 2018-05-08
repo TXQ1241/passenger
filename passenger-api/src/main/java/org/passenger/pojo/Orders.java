@@ -1,6 +1,10 @@
 package org.passenger.pojo;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
+
+import org.apache.commons.beanutils.BeanUtils;
+import org.passenger.vo.OrderVo;
 
 public class Orders {
     private String id;
@@ -22,7 +26,21 @@ public class Orders {
     private String startStationName;
 
     private String arriveStationName;
-
+    
+    public Orders() {}
+    
+    public Orders(OrderVo vo) {
+    	try {
+			BeanUtils.copyProperties(this, vo);
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    
     public String getId() {
         return id;
     }

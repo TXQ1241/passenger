@@ -85,7 +85,6 @@ public class OrderServiceImpl implements IOrderService {
 
 	public void saveOrders(Orders orders) {
 		
-		//修改票数
 		if(StringUtils.isNotBlank(orders.getTicketId())) {
 			Ticket ticket = ticketService.getTicketById(orders.getTicketId());
 			int ticketNum = ticket.getNumber();
@@ -94,11 +93,25 @@ public class OrderServiceImpl implements IOrderService {
 		}
 		
 		if(StringUtils.isNotBlank(orders.getId())) {
-			this.update(orders);
+			//改签的处理
+			Orders ordersInfo = this.getOrdersById(orders.getId());
+			if(ordersInfo != null) {
+				if(StringUtils.isNotBlank(ordersInfo.getTicketId())) {
+					Ticket ticketInfo =  ticketService.getTicketById(ordersInfo.getTicketId());
+					int ticketNumInfo = ticketInfo.getNumber();
+					ticketInfo.setNumber(++ticketNumInfo);
+					this.update(ordersInfo);
+				}
+			}
+			
 		} else {
 			orders.setId(StringUtils.getUUID());
 			orders.setCreateTime(new Date());
 			this.save(orders);
 		}
+	}
+
+	public Orders getOrdersById(String id) {
+		return orderMapper.getOrdersById(id);
 	}
 }

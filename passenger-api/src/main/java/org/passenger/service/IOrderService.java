@@ -37,4 +37,6 @@ public interface IOrderService {
 	List<OrderVo> getOrderVos(OrderVo orderVo);
 
 	void saveOrders(Orders orders);
+	
+	Orders getOrdersById(String id);
 }
