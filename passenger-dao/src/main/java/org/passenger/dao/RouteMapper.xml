@@ -62,6 +62,11 @@
   	</if>
   </select>
   
+  <!-- 通过id获取线路信息 -->
+  <select id="getRouteById" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select route r where r.id = #{id}
+  </select>
+  
   <!-- 获取线路数 -->
   <select id="getRouteCount" resultType="java.lang.Integer" parameterType="org.passenger.vo.RouteVo">
   	select count(*) from route r 

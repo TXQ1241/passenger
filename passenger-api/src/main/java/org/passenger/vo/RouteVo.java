@@ -19,6 +19,7 @@ public class RouteVo extends PageVo {
     private String carTripCode;//车次编码
     private String carTripId;//车次id
     private String date;//日期
+    private String ticketId;//车票数id
 
     public RouteVo(){}
 
@@ -136,4 +137,12 @@ public class RouteVo extends PageVo {
 		this.date = date;
 	}
 
+	public String getTicketId() {
+		return ticketId;
+	}
+
+	public void setTicketId(String ticketId) {
+		this.ticketId = ticketId;
+	}
+	
 }

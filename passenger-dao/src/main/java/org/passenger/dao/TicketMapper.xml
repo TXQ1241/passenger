@@ -48,7 +48,15 @@
   </select>
   
   <select id="getTicketByRoAndDate" resultMap="BaseResultMap" parameterType="org.passenger.pojo.Ticket" >
-  	select * from ticket t where t.route_id = #{routeId} and t.date = #{date}
+  	select * from ticket t
+  	<where>
+  		<if test="routeId != null and routeId != ''">
+  			and t.route_id = #{routeId}
+  		</if>
+  		<if test="ticketDate != null and ticketDate != ''">
+  			and t.ticket_date = #{ticketDate}
+  		</if>
+  	</where>
   </select>
   
     <!-- 获取车票记录数 -->
